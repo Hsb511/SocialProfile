@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
 
-interface UserService {
+interface PostService {
 
 
     @GET("/post?limit=100")

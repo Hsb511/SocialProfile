@@ -8,7 +8,7 @@ class DummyApi {
         const val APP_ID = ""
     }
 
-    val userService: UserService
+    val postService: PostService
 
     init {
         val retrofit = Retrofit.Builder()
@@ -16,7 +16,7 @@ class DummyApi {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        userService = retrofit.create(UserService::class.java)
+        postService = retrofit.create(PostService::class.java)
     }
 
 }
