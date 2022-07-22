@@ -9,12 +9,13 @@ const val ISO_8601_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 
 fun PostPreview.toModel() =
     PostModel(
-        text = this.text,
-        image = this.image,
-        likes = this.likes,
-        tags = this.tags,
+        text = text,
+        image = image,
+        likes = likes,
+        tags = tags,
         publishDate = LocalDateTime
-            .parse(this.publishDate, DateTimeFormatter.ofPattern(ISO_8601_FORMAT)),
-        ownerId = this.owner.id
+            .parse(publishDate, DateTimeFormatter.ofPattern(ISO_8601_FORMAT)),
+        ownerId = owner.id,
+        ownerName = "${owner.firstName} ${owner.lastName}"
     )
 

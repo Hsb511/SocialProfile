@@ -16,7 +16,7 @@ class PostListAdapter: ListAdapter<PostModel, PostListAdapter.PostViewHolder>(Po
         private val postDescription: TextView = itemView.findViewById(R.id.post_description)
 
         fun bind(post: PostModel) {
-            userName.text = post.ownerId
+            userName.text = post.ownerName
             postDescription.text = post.text
         }
     }

@@ -8,5 +8,6 @@ data class PostModel (
     val likes: Int,
     val tags: List<String>,
     val publishDate: LocalDateTime,
-    val ownerId: String
+    val ownerId: String,
+    val ownerName: String
 )
