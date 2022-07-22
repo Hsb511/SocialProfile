@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "SocialProfile"
 include(":app")
 include(":api")
+include(":home")
