@@ -8,7 +8,7 @@ import retrofit2.http.Headers
 import retrofit2.http.Query
 
 interface PostService {
-    @GET("/post?limit=100")
+    @GET("post?limit=100")
     @Headers("app-id: ${DummyApi.APP_ID}")
     suspend fun getPosts(@Query("page") page: UInt): Response<Page<PostPreview>>
 }
