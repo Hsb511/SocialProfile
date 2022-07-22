@@ -16,6 +16,7 @@ fun PostPreview.toModel() =
         publishDate = LocalDateTime
             .parse(publishDate, DateTimeFormatter.ofPattern(ISO_8601_FORMAT)),
         ownerId = owner.id,
-        ownerName = "${owner.firstName} ${owner.lastName}"
+        ownerName = "${owner.firstName} ${owner.lastName}",
+        ownerPicture = owner.picture
     )
 

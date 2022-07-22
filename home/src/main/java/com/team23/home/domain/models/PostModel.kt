@@ -9,5 +9,6 @@ data class PostModel (
     val tags: List<String>,
     val publishDate: LocalDateTime,
     val ownerId: String,
-    val ownerName: String
+    val ownerName: String,
+    val ownerPicture: String
 )
