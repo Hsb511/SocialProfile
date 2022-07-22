@@ -1,0 +1,33 @@
+package com.team23.home.ui.adapters
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.team23.home.R
+import com.team23.home.domain.models.PostModel
+
+class PostListAdapter: ListAdapter<PostModel, PostListAdapter.PostViewHolder>(PostDiffCallBack()) {
+    class PostViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        fun bind(post: PostModel) {}
+    }
+
+    private class PostDiffCallBack: DiffUtil.ItemCallback<PostModel>() {
+        override fun areContentsTheSame(oldItem: PostModel, newItem: PostModel) = oldItem == newItem
+
+        override fun areItemsTheSame(oldItem: PostModel, newItem: PostModel) = oldItem == newItem
+    }
+
+    override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
+        holder.bind(getItem(position))
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
+        val itemView = LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.fragment_home, parent, false)
+        return PostViewHolder(itemView)
+    }
+}
