@@ -3,6 +3,7 @@ plugins {
 }
 
 dependencies {
+    // Retrofit
     api("com.squareup.retrofit2:retrofit:${Versions.RETROFIT}")
     implementation("com.squareup.retrofit2:converter-gson:${Versions.RETROFIT}")
 

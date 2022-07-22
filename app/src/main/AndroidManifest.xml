@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.team23.socialprofile">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="com.team23.App"
         android:allowBackup="true"
