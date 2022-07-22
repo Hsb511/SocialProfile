@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.team23.socialprofile"
-        minSdk = 25
+        minSdk = 26
         targetSdk = 32
         versionCode = 1
         versionName = "1.0"

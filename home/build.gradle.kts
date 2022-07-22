@@ -1,13 +1,15 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
     compileSdk = 32
 
     defaultConfig {
-        minSdk = 25
+        minSdk = 26
     }
 
     compileOptions {
@@ -21,6 +23,11 @@ android {
 }
 
 dependencies {
+    implementation(project(":api"))
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android:${Versions.HILT}")
+    kapt("com.google.dagger:hilt-android-compiler:${Versions.HILT}")
 
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.4.2")
