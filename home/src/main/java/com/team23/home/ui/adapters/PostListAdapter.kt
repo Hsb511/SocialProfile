@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.team23.home.R
 import com.team23.home.domain.models.PostModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.net.URL
 import java.time.format.DateTimeFormatter
 
@@ -24,14 +26,10 @@ class PostListAdapter: ListAdapter<PostModel, PostListAdapter.PostViewHolder>(Po
         private val postDescription: TextView = itemView.findViewById(R.id.post_description)
 
         fun bind(post: PostModel) {
-            // TODO CHANGE THAT FOR COROUTINE !
-            val policy: StrictMode.ThreadPolicy = StrictMode.ThreadPolicy.Builder().permitAll().build()
-            StrictMode.setThreadPolicy(policy)
-            // TODO CHANGE THAT OR AT LEAST FACTORIZE IT
-            userPicture.setImageBitmap(BitmapFactory.decodeStream(URL(post.ownerPicture).openConnection().getInputStream()))
+            userPicture.setImageBitmap(post.ownerPicture)
             userName.text = post.ownerName
             postDate.text = post.publishDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm:ss"))
-            postImage.setImageBitmap(BitmapFactory.decodeStream(URL(post.image).openConnection().getInputStream()))
+            postImage.setImageBitmap(post.image)
             postDescription.text = post.text
         }
     }

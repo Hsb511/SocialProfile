@@ -13,7 +13,7 @@ class PostRepositoryImpl @Inject constructor(
     override suspend fun getPosts(): List<PostModel> =
         withContext(Dispatchers.IO) { postService.getPosts(1u) }.let { response ->
             if (response.isSuccessful) {
-                response.body()!!.data.map { it.toModel() }
+                response.body()!!.data.map { it.toModel(Dispatchers.IO) }
             } else {
                 emptyList()
             }
