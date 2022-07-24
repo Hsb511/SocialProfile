@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +15,7 @@ import com.team23.home.ui.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment: Fragment() {
+class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModels()
     private lateinit var postRecyclerView: RecyclerView
 
@@ -28,7 +29,7 @@ class HomeFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        postRecyclerView = requireView().findViewById(R.id.fragment_home)
+        postRecyclerView = requireView().findViewById(R.id.posts_list)
         initViews()
         initObservers()
     }
@@ -42,7 +43,12 @@ class HomeFragment: Fragment() {
 
     private fun initObservers() {
         homeViewModel.isLoading.observe(viewLifecycleOwner) {
-            // TODO
+            requireView().findViewById<ProgressBar>(R.id.progress_home).visibility =
+            if (it) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
         }
         homeViewModel.posts.observe(viewLifecycleOwner) {
             (postRecyclerView.adapter as PostListAdapter).submitList(it)
