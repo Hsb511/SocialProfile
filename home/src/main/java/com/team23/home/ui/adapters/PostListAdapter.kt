@@ -28,7 +28,7 @@ class PostListAdapter: ListAdapter<PostModel, PostListAdapter.PostViewHolder>(Po
         fun bind(post: PostModel) {
             userPicture.setImageBitmap(post.ownerPicture)
             userName.text = post.ownerName
-            postDate.text = post.publishDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm:ss"))
+            postDate.text = post.publishDate
             postImage.setImageBitmap(post.image)
             postDescription.text = post.text
         }
