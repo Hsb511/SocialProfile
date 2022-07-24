@@ -29,7 +29,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:${Versions.HILT}")
     kapt("com.google.dagger:hilt-android-compiler:${Versions.HILT}")
 
-    implementation("androidx.core:core-ktx:1.7.0")
+    implementation("androidx.core:core-ktx:${Versions.ANDROID_CORE}")
     implementation("androidx.appcompat:appcompat:1.4.2")
     implementation("com.google.android.material:material:1.6.1")
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.0")
