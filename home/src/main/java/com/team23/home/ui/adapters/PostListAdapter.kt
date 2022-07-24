@@ -1,7 +1,5 @@
 package com.team23.home.ui.adapters
 
-import android.graphics.BitmapFactory
-import android.os.StrictMode
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +10,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.team23.home.R
 import com.team23.home.domain.models.PostModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import java.net.URL
-import java.time.format.DateTimeFormatter
 
 class PostListAdapter: ListAdapter<PostModel, PostListAdapter.PostViewHolder>(PostDiffCallBack()) {
     class PostViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
