@@ -11,15 +11,6 @@ android {
     defaultConfig {
         minSdk = 26
     }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
 }
 
 dependencies {
@@ -30,7 +21,7 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:${Versions.HILT}")
 
     implementation("androidx.core:core-ktx:${Versions.ANDROID_CORE}")
-    implementation("androidx.appcompat:appcompat:1.4.2")
+    implementation("androidx.appcompat:appcompat:${Versions.APP_COMPAT}")
     implementation("com.google.android.material:material:1.6.1")
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.0")
