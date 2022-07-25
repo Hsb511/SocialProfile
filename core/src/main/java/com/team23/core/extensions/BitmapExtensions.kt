@@ -1,4 +1,4 @@
-package com.team23.home.data.extensions
+package com.team23.core.extensions
 
 import android.graphics.*
 import kotlinx.coroutines.CoroutineDispatcher

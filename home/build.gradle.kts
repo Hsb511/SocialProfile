@@ -15,6 +15,7 @@ android {
 
 dependencies {
     implementation(project(":api"))
+    implementation(project(":core"))
 
     // Hilt
     implementation("com.google.dagger:hilt-android:${Versions.HILT}")

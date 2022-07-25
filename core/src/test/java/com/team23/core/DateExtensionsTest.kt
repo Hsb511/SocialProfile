@@ -1,8 +1,8 @@
-package com.team23.home
+package com.team23.core
 
-import com.team23.home.data.extensions.fromISO8601toReadableDateTime
-import com.team23.home.data.extensions.toLocalDateTime
-import com.team23.home.data.extensions.toString
+import com.team23.core.extensions.fromISO8601toReadableDateTime
+import com.team23.core.extensions.toLocalDateTime
+import com.team23.core.extensions.toString
 import org.junit.Assert.*
 import org.junit.Test
 import java.time.LocalDateTime

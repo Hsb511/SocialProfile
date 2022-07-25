@@ -1,4 +1,4 @@
-package com.team23.home.data.extensions
+package com.team23.core.extensions
 
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
