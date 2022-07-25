@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- User profile strings -->
+    <string name="user_profile_title">Profile</string>
+    <string name="user_profile_contact_info">Contact information</string>
+    <string name="user_profile_contact_email">Email</string>
+    <string name="user_profile_contact_phone">Phone</string>
+    <string name="user_profile_contact_address">Address</string>
+
+    <!-- Error messages -->
+    <string name="user_profile_error_userid">The user id is invalid</string>
+    <string name="user_profile_error_data">An error occurred while fetching the data</string>
+</resources>

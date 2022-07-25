@@ -25,8 +25,11 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${Versions.KOTLIN}")
     implementation("androidx.appcompat:appcompat:${Versions.APP_COMPAT}")
     implementation("androidx.fragment:fragment-ktx:${Versions.FRAGMENT}")
+    implementation("com.google.android.material:material:1.6.1")
+    implementation("androidx.core:core-ktx:1.8.0")
 
     implementation(project(":api"))
+    implementation(project(":core"))
 
     // Compose libraries
     implementation("androidx.compose.compiler:compiler:${Versions.COMPOSE}")
@@ -45,9 +48,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:${Versions.HILT}")
     kapt("com.google.dagger:hilt-android-compiler:${Versions.HILT}")
 
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.4.2")
-    implementation("com.google.android.material:material:1.6.1")
+    // TEST
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")

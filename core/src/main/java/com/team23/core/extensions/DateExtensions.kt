@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter
 
 const val ISO_8601_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 const val READABLE_DATE_TIME_FORMAT = "dd MMM yyyy HH:mm:ss"
+const val BIRTHDATE_FORMAT = "dd/MM/yyyy"
 
 fun String.toLocalDateTime(format: String): LocalDateTime =
     LocalDateTime.parse(this, DateTimeFormatter.ofPattern(format))
@@ -14,3 +15,6 @@ fun LocalDateTime.toString(format: String): String =
 
 fun String.fromISO8601toReadableDateTime() =
     this.toLocalDateTime(ISO_8601_FORMAT).toString(READABLE_DATE_TIME_FORMAT)
+
+fun String.fromISO8601ToBirthDate() =
+    this.toLocalDateTime(ISO_8601_FORMAT).toString(BIRTHDATE_FORMAT)
