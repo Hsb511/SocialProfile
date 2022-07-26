@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_home"
+    app:startDestination="@id/fragment_user">
+
+    <fragment
+        android:id="@+id/fragment_user"
+        android:name="com.team23.user.ui.views.UserFragment"
+        android:label="UserFragment">
+
+        <deepLink app:uri="socialProfile://user"/>
+    </fragment>
+</navigation>
