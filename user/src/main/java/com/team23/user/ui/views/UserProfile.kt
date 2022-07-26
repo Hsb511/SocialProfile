@@ -18,7 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,8 +25,8 @@ import androidx.compose.ui.unit.dp
 import com.team23.user.R
 import com.team23.user.domain.models.ContactData
 import com.team23.user.domain.models.ContactDataCategory
-import com.team23.user.domain.models.UserModel
 import com.team23.user.ui.viewmodels.UserViewModel
+import com.team23.user.ui.viewobjects.UserVO
 import kotlinx.coroutines.launch
 
 @Composable
@@ -39,11 +38,10 @@ fun UserProfile(userViewModel: UserViewModel, navigateToSearch: () -> Unit) {
     )
 }
 
-
 @Composable
 fun UserProfile(
     onBackToSearch: () -> Unit,
-    user: UserModel?,
+    user: UserVO?,
     errorMessageResId: Int = -1
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -96,15 +94,12 @@ fun UserProfile(
                         .fillMaxWidth()
                         .height(IntrinsicSize.Min)
                 ) {
-                    Image(
-                        // TODO CHANGE THE BACKGROUND PICTURE DEPENDING ON A BUSINESS LOGIC
-                        bitmap = user.picture!!.asImageBitmap(),
-                        contentDescription = "user profile background",
-                        contentScale = ContentScale.Crop,
+                    Surface(
+                        color = user.backgroundColor,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(100.dp)
-                    )
+                    ) {}
 
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -117,14 +112,25 @@ fun UserProfile(
                                 .width(IntrinsicSize.Min)
                                 .height(IntrinsicSize.Min)
                         ) {
-                            Image(
-                                bitmap = user.picture.asImageBitmap(),
-                                contentDescription = "user picture",
-                                modifier = Modifier
-                                    .size(120.dp)
-                                    .clip(CircleShape)
-                                    .border(2.dp, MaterialTheme.colors.background, CircleShape)
-                            )
+                            if (user.picture != null) {
+                                Image(
+                                    bitmap = user.picture.asImageBitmap(),
+                                    contentDescription = "user picture",
+                                    modifier = Modifier
+                                        .size(120.dp)
+                                        .clip(CircleShape)
+                                        .border(2.dp, MaterialTheme.colors.background, CircleShape)
+                                )
+                            } else {
+                                Image(
+                                    painter = painterResource(id = R.drawable.image_default_avatar),
+                                    contentDescription = "default user picture",
+                                    modifier = Modifier
+                                        .size(120.dp)
+                                        .clip(CircleShape)
+                                        .border(2.dp, MaterialTheme.colors.background, CircleShape)
+                                )
+                            }
                             Icon(
                                 painter = painterResource(user.genderResId),
                                 contentDescription = "gender icon",
@@ -135,7 +141,7 @@ fun UserProfile(
                             )
                         }
                         Text(
-                            text = user.name ,
+                            text = user.name,
                             color = MaterialTheme.colors.onBackground,
                             style = MaterialTheme.typography.h6,
                             modifier = Modifier.padding(8.dp)
@@ -172,10 +178,11 @@ fun UserProfile(
 fun UserProfilePreview() {
     UserProfile(
         onBackToSearch = {},
-        user = UserModel(
+        user = UserVO(
             name = "Jesse Smith",
             picture = null,
             genderResId = R.drawable.ic_female,
+            backgroundColor = MaterialTheme.colors.secondary,
             dateOfBirth = "30/04/1996",
             contactData = listOf(
                 ContactData(ContactDataCategory.EMAIL, "jesse@alpineskihouse.com"),
@@ -184,7 +191,7 @@ fun UserProfilePreview() {
                     ContactDataCategory.ADDRESS,
                     "9614, SÃ¸ndermarksvej, \r\nKongsvinger \r\nNordjylland \r\nDenmark"
                 )
-            ),
+            )
         )
     )
 }
