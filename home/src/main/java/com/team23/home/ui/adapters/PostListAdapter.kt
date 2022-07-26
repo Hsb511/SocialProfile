@@ -12,7 +12,7 @@ import com.team23.home.R
 import com.team23.home.domain.models.PostModel
 
 class PostListAdapter: ListAdapter<PostModel, PostListAdapter.PostViewHolder>(PostDiffCallBack()) {
-    class PostViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class PostViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val userPicture: ImageView = itemView.findViewById(R.id.user_picture)
         private val userName: TextView = itemView.findViewById(R.id.user_name)
         private val postDate: TextView = itemView.findViewById(R.id.post_date)
@@ -25,8 +25,13 @@ class PostListAdapter: ListAdapter<PostModel, PostListAdapter.PostViewHolder>(Po
             postDate.text = post.publishDate
             postImage.setImageBitmap(post.image)
             postDescription.text = post.text
+            userPicture.setOnClickListener {
+                onItemClick?.invoke(post.ownerId)
+            }
         }
     }
+
+    var onItemClick: ((String) -> Unit)? = null
 
     private class PostDiffCallBack: DiffUtil.ItemCallback<PostModel>() {
         override fun areContentsTheSame(oldItem: PostModel, newItem: PostModel) = oldItem == newItem

@@ -9,6 +9,7 @@ class DummyApi {
     }
 
     val postService: PostService
+    val userService: UserService
 
     init {
         val retrofit = Retrofit.Builder()
@@ -17,6 +18,7 @@ class DummyApi {
             .build()
 
         postService = retrofit.create(PostService::class.java)
+        userService = retrofit.create(UserService::class.java)
     }
 
 }

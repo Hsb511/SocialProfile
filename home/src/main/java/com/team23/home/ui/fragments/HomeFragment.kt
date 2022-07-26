@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDeepLinkRequest
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.team23.home.R
+import androidx.navigation.fragment.findNavController
 import com.team23.home.ui.adapters.PostListAdapter
 import com.team23.home.ui.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +40,9 @@ class HomeFragment : Fragment() {
     private fun initViews() {
         postRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = PostListAdapter()
+            adapter = PostListAdapter().apply {
+                onItemClick = { userId -> navigateToUser(userId) }
+            }
         }
     }
 
@@ -53,5 +58,14 @@ class HomeFragment : Fragment() {
         homeViewModel.posts.observe(viewLifecycleOwner) {
             (postRecyclerView.adapter as PostListAdapter).submitList(it)
         }
+    }
+
+    private fun navigateToUser(userId: String) {
+        // TODO USE USERID
+        val navController = findNavController()
+        val request = NavDeepLinkRequest.Builder
+            .fromUri("socialProfile://user".toUri())
+            .build()
+        navController.navigate(request)
     }
 }
