@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -94,13 +95,14 @@ fun UserProfile(
                         .fillMaxWidth()
                         .height(IntrinsicSize.Min)
                 ) {
-                    Surface(
-                        color = user.backgroundColor,
+                    Image(
+                        painter = painterResource(id = user.backgroundResId),
+                        contentDescription = "user profile background",
+                        contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(100.dp)
-                    ) {}
-
+                    )
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier
@@ -182,7 +184,7 @@ fun UserProfilePreview() {
             name = "Jesse Smith",
             picture = null,
             genderResId = R.drawable.ic_female,
-            backgroundColor = MaterialTheme.colors.secondary,
+            backgroundResId = R.drawable.picture_beach,
             dateOfBirth = "30/04/1996",
             contactData = listOf(
                 ContactData(ContactDataCategory.EMAIL, "jesse@alpineskihouse.com"),

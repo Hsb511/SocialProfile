@@ -2,7 +2,7 @@ package com.team23.user.data.mappers
 
 import com.team23.api.models.User
 import com.team23.core.extensions.downloadBitmap
-import com.team23.core.extensions.fromISO8601ToBirthDate
+import com.team23.core.extensions.fromISO8601
 import com.team23.core.extensions.toRoundBitmap
 import com.team23.user.domain.models.ContactData
 import com.team23.user.domain.models.ContactDataCategory
@@ -13,7 +13,7 @@ suspend fun User.toModel(dispatcher: CoroutineDispatcher) = UserModel(
     name = "$firstName $lastName",
     picture = picture.downloadBitmap(dispatcher)?.toRoundBitmap(),
     gender = gender,
-    dateOfBirth = dateOfBirth.fromISO8601ToBirthDate(),
+    dateOfBirth = dateOfBirth.fromISO8601(),
     contactData = listOf(
         ContactData(ContactDataCategory.EMAIL, email),
         ContactData(ContactDataCategory.PHONE, phone),
