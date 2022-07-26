@@ -1,6 +1,5 @@
 package com.team23.user.ui.views
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +29,10 @@ class UserFragment : Fragment() {
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
 
         val userViewModel: UserViewModel by viewModels {
-            UserViewModel.provideFactory(viewModelAssistedFactory, "60d0fe4f5311236168a109ca")
+            UserViewModel.provideFactory(
+                viewModelAssistedFactory,
+                arguments?.getString("userId")
+            )
         }
 
         setContent {

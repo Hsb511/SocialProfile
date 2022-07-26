@@ -8,7 +8,10 @@
         android:id="@+id/fragment_user"
         android:name="com.team23.user.ui.views.UserFragment"
         android:label="UserFragment">
-
-        <deepLink app:uri="socialProfile://user"/>
+        <!--<argument
+            android:name="userId"
+            android:defaultValue=""
+            app:argType="string" />-->
+        <deepLink app:uri="socialProfile://users/{userId}" />
     </fragment>
 </navigation>

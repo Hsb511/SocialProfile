@@ -61,10 +61,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToUser(userId: String) {
-        // TODO USE USERID
         val navController = findNavController()
         val request = NavDeepLinkRequest.Builder
-            .fromUri("socialProfile://user".toUri())
+            .fromUri("socialProfile://users/$userId".toUri())
             .build()
         navController.navigate(request)
     }
