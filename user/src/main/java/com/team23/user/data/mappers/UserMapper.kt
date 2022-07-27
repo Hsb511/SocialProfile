@@ -18,7 +18,7 @@ suspend fun UserDTO.toModel(dispatcher: CoroutineDispatcher) = UserModel(
         ContactData(ContactDataCategory.EMAIL, email),
         ContactData(ContactDataCategory.PHONE, phone),
         ContactData(ContactDataCategory.ADDRESS,
-            "${locationDTO.street} \r\n${locationDTO.city} ${locationDTO.state} \r\n${locationDTO.country}".ifBlank { "" })
+            "${location.street} \r\n${location.city} ${location.state} \r\n${location.country}".ifBlank { "" })
     )
 
 )

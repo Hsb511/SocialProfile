@@ -10,5 +10,5 @@ data class UserDTO(
     val dateOfBirth: String,
     val email: String,
     val phone: String,
-    val locationDTO: LocationDTO
+    val location: LocationDTO
 )
