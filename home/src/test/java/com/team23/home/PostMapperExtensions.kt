@@ -1,22 +1,18 @@
 package com.team23.home
 
-import com.team23.api.models.PostPreview
-import com.team23.api.models.UserPreview
+import com.team23.api.models.PostPreviewDTO
+import com.team23.api.models.UserPreviewDTO
 import com.team23.home.data.mappers.toModel
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.*
-import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
-import kotlin.coroutines.ContinuationInterceptor
 
 @ExperimentalCoroutinesApi
 class PostMapperExtensions {
@@ -28,14 +24,14 @@ class PostMapperExtensions {
     @Test
     fun `given empty PostPreview, when toModel is called, then `() {
         // GIVEN
-        val postPreview = PostPreview(
+        val postPreview = PostPreviewDTO(
             id = "",
             text = "",
             image = "",
             likes = -1,
             tags = emptyList(),
             publishDate = "",
-            owner = UserPreview(
+            owner = UserPreviewDTO(
                 id = "",
                 title = "",
                 firstName = "",
@@ -48,14 +44,14 @@ class PostMapperExtensions {
     @Test
     fun `given valid PostPreview, when toModel is called, then returns correct PostModel`() {
         // GIVEN
-        val postPreview = PostPreview(
+        val postPreview = PostPreviewDTO(
             id = "23",
             text = "WOW",
             image = "https://img.dummyapi.io/photo-1564694202779-bc908c327862.jpg",
             likes = 23,
             tags = listOf("test", "wow"),
             publishDate = "2020-05-24T14:53:17.598Z",
-            owner = UserPreview(
+            owner = UserPreviewDTO(
                 id = "7",
                 title = "Mr",
                 firstName = "Super",

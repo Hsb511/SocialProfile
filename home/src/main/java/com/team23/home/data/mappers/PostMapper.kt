@@ -1,13 +1,13 @@
 package com.team23.home.data.mappers
 
-import com.team23.api.models.PostPreview
+import com.team23.api.models.PostPreviewDTO
 import com.team23.core.extensions.downloadBitmap
 import com.team23.core.extensions.fromISO8601toReadableDateTime
 import com.team23.core.extensions.toRoundBitmap
 import com.team23.home.domain.models.PostModel
 import kotlinx.coroutines.CoroutineDispatcher
 
-suspend fun PostPreview.toModel(
+suspend fun PostPreviewDTO.toModel(
     dispatcher: CoroutineDispatcher
 ) =
     PostModel(

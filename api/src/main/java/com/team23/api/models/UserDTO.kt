@@ -1,6 +1,6 @@
 package com.team23.api.models
 
-data class User(
+data class UserDTO(
     val id: String,
     val title: String,
     val firstName: String,
@@ -10,5 +10,5 @@ data class User(
     val dateOfBirth: String,
     val email: String,
     val phone: String,
-    val location: Location
+    val locationDTO: LocationDTO
 )

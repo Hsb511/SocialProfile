@@ -1,6 +1,6 @@
 package com.team23.api
 
-import com.team23.api.models.User
+import com.team23.api.models.UserDTO
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -10,5 +10,5 @@ interface UserService {
 
     @GET("user/{id}")
     @Headers("app-id: ${DummyApi.APP_ID}")
-    suspend fun getUserData(@Path("id") id: String): Response<User>
+    suspend fun getUserData(@Path("id") id: String): Response<UserDTO>
 }

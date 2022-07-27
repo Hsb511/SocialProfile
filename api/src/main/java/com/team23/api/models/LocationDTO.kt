@@ -1,6 +1,6 @@
 package com.team23.api.models
 
-data class Location(
+data class LocationDTO(
     val street: String,
     val city: String,
     val state: String,

@@ -17,7 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner
 import java.time.LocalDateTime
 
 @RunWith(MockitoJUnitRunner::class)
-class GetUserUseCaseTest {
+class GetUserDTOUseCaseTest {
     @Mock
     private lateinit var userRepository: UserRepository
 
