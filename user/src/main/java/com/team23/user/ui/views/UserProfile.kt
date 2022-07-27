@@ -80,7 +80,11 @@ fun UserProfile(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    CircularProgressIndicator()
+                    CircularProgressIndicator(
+                        color = MaterialTheme.colors.secondary,
+                        strokeWidth = 8.dp,
+                        modifier = Modifier.size(80.dp)
+                    )
                 }
             } else if (errorMessageResId != -1) {
                 val errorMessage = stringResource(id = errorMessageResId)
