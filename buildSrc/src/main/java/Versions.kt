@@ -6,6 +6,6 @@ object Versions {
     const val FRAGMENT = "1.5.0"
     const val HILT = "2.41"
     const val KOTLIN = "1.6.20"
-    const val NAVIGATION = "2.4.2"
+    const val NAVIGATION = "2.5.1"
     const val RETROFIT = "2.9.0"
 }
