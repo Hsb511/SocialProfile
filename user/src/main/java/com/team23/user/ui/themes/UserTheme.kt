@@ -12,7 +12,7 @@ fun UserTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val userColors = if (darkTheme) { UserDarkColors } else { UserLightColors }
+    val userColors = if (darkTheme) { userDarkColors() } else { userLightColors() }
 
     MaterialTheme(
         colors = userColors,
