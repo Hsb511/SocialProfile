@@ -1,5 +1,6 @@
-package com.team23.api
+package com.team23.api.services
 
+import com.team23.api.DummyApi
 import com.team23.api.models.Page
 import com.team23.api.models.PostDTO
 import com.team23.api.models.PostPreviewDTO

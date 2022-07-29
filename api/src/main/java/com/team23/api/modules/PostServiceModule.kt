@@ -1,4 +1,4 @@
-package com.team23.post.data.modules
+package com.team23.api.modules
 
 import com.team23.api.DummyApi
 import dagger.Module

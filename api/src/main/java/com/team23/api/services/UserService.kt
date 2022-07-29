@@ -1,5 +1,6 @@
-package com.team23.api
+package com.team23.api.services
 
+import com.team23.api.DummyApi
 import com.team23.api.models.UserDTO
 import retrofit2.Response
 import retrofit2.http.GET

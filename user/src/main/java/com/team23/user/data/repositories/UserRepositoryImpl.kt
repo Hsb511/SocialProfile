@@ -1,6 +1,6 @@
 package com.team23.user.data.repositories
 
-import com.team23.api.UserService
+import com.team23.api.services.UserService
 import com.team23.user.data.mappers.toModel
 import com.team23.user.domain.models.UserModel
 import kotlinx.coroutines.Dispatchers

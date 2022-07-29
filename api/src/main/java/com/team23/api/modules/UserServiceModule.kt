@@ -1,4 +1,4 @@
-package com.team23.home.data.modules
+package com.team23.api.modules
 
 import com.team23.api.DummyApi
 import dagger.Module
@@ -6,10 +6,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
-
 @Module
 @InstallIn(SingletonComponent::class)
-class PostServiceModule {
+class UserServiceModule {
     @Provides
-    fun providePostService() = DummyApi().postService
+    fun provideUserService() = DummyApi().userService
 }
