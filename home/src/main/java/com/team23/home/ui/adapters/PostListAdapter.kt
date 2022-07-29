@@ -20,18 +20,26 @@ class PostListAdapter: ListAdapter<PostModel, PostListAdapter.PostViewHolder>(Po
         private val postDescription: TextView = itemView.findViewById(R.id.post_description)
 
         fun bind(post: PostModel) {
-            userPicture.setImageBitmap(post.ownerPicture)
+            userPicture.apply {
+                this.setImageBitmap(post.ownerPicture)
+                this.setOnClickListener {
+                    onUserClick?.invoke(post.ownerId)
+                }
+            }
             userName.text = post.ownerName
             postDate.text = post.publishDate
-            postImage.setImageBitmap(post.image)
-            postDescription.text = post.text
-            userPicture.setOnClickListener {
-                onItemClick?.invoke(post.ownerId)
+            postImage.apply {
+                this.setImageBitmap(post.image)
+                this.setOnClickListener {
+                    onPostClick?.invoke(post.id)
+                }
             }
+            postDescription.text = post.text
         }
     }
 
-    var onItemClick: ((String) -> Unit)? = null
+    var onUserClick: ((String) -> Unit)? = null
+    var onPostClick: ((String) -> Unit)? = null
 
     private class PostDiffCallBack: DiffUtil.ItemCallback<PostModel>() {
         override fun areContentsTheSame(oldItem: PostModel, newItem: PostModel) = oldItem == newItem

@@ -41,7 +41,8 @@ class HomeFragment : Fragment() {
         postRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = PostListAdapter().apply {
-                onItemClick = { userId -> navigateToUser(userId) }
+                onUserClick = { userId -> navigateTo("users", userId) }
+                onPostClick = { postId -> navigateTo("posts", postId) }
             }
         }
     }
@@ -60,10 +61,10 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun navigateToUser(userId: String) {
+    private fun navigateTo(page: String, userId: String) {
         val navController = findNavController()
         val request = NavDeepLinkRequest.Builder
-            .fromUri("socialProfile://users/$userId".toUri())
+            .fromUri("socialProfile://$page/$userId".toUri())
             .build()
         navController.navigate(request)
     }

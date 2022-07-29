@@ -1,6 +1,6 @@
 package com.team23.post.data.repositories
 
-import com.team23.api.PostService
+import com.team23.api.services.PostService
 import com.team23.post.data.mappers.toModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

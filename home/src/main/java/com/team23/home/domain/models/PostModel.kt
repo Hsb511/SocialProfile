@@ -3,6 +3,7 @@ package com.team23.home.domain.models
 import android.graphics.Bitmap
 
 data class PostModel (
+    val id: String,
     val text: String,
     val image: Bitmap?,
     val likes: Int,

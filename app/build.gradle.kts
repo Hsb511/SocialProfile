@@ -41,9 +41,10 @@ dependencies {
     // Navigation
     implementation("androidx.navigation:navigation-runtime-ktx:${Versions.NAVIGATION}")
     implementation("androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}")
-    implementation(project(":home"))
-    implementation(project(":user"))
     implementation(project(":core"))
+    implementation(project(":home"))
+    implementation(project(":post"))
+    implementation(project(":user"))
 
     implementation("androidx.core:core-ktx:${Versions.ANDROID_CORE}")
     implementation("androidx.appcompat:appcompat:1.4.2")

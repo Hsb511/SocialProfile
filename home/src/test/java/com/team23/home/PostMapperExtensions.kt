@@ -65,6 +65,7 @@ class PostMapperExtensions {
             val postModel = postPreview.toModel(testDispatcher)
 
             // THEN
+            assertEquals("23", postModel.id)
             assertEquals("WOW", postModel.text)
             assertNotNull(postModel.image)
             assertEquals(23, postModel.likes)

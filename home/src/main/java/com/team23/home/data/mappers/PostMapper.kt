@@ -11,6 +11,7 @@ suspend fun PostPreviewDTO.toModel(
     dispatcher: CoroutineDispatcher
 ) =
     PostModel(
+        id = id,
         text = text,
         image = image.downloadBitmap(dispatcher),
         likes = likes,
