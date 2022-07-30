@@ -6,10 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
 import com.team23.user.ui.themes.UserTheme
 import com.team23.user.ui.viewmodels.UserViewModel
@@ -38,10 +36,7 @@ class UserFragment : Fragment() {
         setContent {
             UserTheme {
                 UserProfile(userViewModel = userViewModel, navigateToSearch = {
-                    findNavController().navigate(
-                        NavDeepLinkRequest.Builder
-                            .fromUri("socialProfile://home".toUri())
-                            .build())
+                    findNavController().popBackStack()
                 })
             }
         }
