@@ -8,6 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.team23.core.extensions.navigateToUser
 import com.team23.post.R
 import com.team23.post.ui.viewmodels.PostViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,7 +45,12 @@ class PostFragment: Fragment() {
     private fun initObservers() {
         postViewModel.post.observe(viewLifecycleOwner) {
             requireView().findViewById<ImageView>(R.id.post_picture).setImageBitmap(it.postPicture)
-            requireView().findViewById<ImageView>(R.id.user_picture).setImageBitmap(it.userPicture)
+            requireView().findViewById<ImageView>(R.id.user_picture).apply {
+                this.setImageBitmap(it.userPicture)
+                this.setOnClickListener { _ ->
+                    findNavController().navigateToUser(it.userId)
+                }
+            }
             requireView().findViewById<TextView>(R.id.user_name).text = it.username
             requireView().findViewById<TextView>(R.id.post_date).text = it.postDate
             requireView().findViewById<TextView>(R.id.post_description).text = it.postDescription
