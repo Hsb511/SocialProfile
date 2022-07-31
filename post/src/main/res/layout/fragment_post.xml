@@ -5,6 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/post_top_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/post_toolbar"
+            android:layout_height="@dimen/abc_action_bar_default_height_material"
+            android:layout_width="match_parent"
+            android:background="?attr/colorPrimary"
+            app:title="@string/post_title"
+            app:titleTextColor="?attr/colorOnPrimary"/>
+            <!-- TODO app:navigationIcon="?attr/ic_arrow_back"-->
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
     <ImageView
         android:id="@+id/post_picture"
         android:layout_width="match_parent"
@@ -14,7 +35,7 @@
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/post_top_bar_layout"
         tools:scaleType="fitStart"
         tools:src="@tools:sample/backgrounds/scenic" />
 
@@ -26,7 +47,7 @@
         android:layout_margin="8dp"
         android:contentDescription="@string/user_picture"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/post_top_bar_layout"
         tools:src="@tools:sample/avatars" />
 
     <TextView
@@ -42,7 +63,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/user_picture"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/post_top_bar_layout"
         tools:text="@tools:sample/full_names" />
 
     <TextView
@@ -74,6 +95,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"
+        android:layout_margin="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/post_picture_divider"

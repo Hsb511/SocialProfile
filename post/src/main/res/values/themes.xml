@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.SocialProfile" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="ic_arrow_back">@drawable/ic_arrow_back_light</item>
+    </style>
+</resources>

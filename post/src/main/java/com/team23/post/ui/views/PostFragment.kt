@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -39,7 +41,20 @@ class PostFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViews()
         initObservers()
+    }
+
+    private fun initViews() {
+        requireView().findViewById<Toolbar>(R.id.post_toolbar).apply {
+            /* TODO
+            val context = this@PostFragment.requireContext()
+
+            this.navigationIcon = getDrawable(context, R.attr.ic_arrow_back ) */
+            this.setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
+        }
     }
 
     private fun initObservers() {
