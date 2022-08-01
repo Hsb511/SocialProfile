@@ -18,9 +18,9 @@
             android:layout_height="@dimen/abc_action_bar_default_height_material"
             android:layout_width="match_parent"
             android:background="?attr/colorPrimary"
+            app:navigationIcon="?attr/ic_arrow_back"
             app:title="@string/post_title"
             app:titleTextColor="?attr/colorOnPrimary"/>
-            <!-- TODO app:navigationIcon="?attr/ic_arrow_back"-->
 
 
     </com.google.android.material.appbar.AppBarLayout>
