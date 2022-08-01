@@ -12,10 +12,13 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.divider.MaterialDivider
 import com.team23.core.extensions.handleVisibility
 import com.team23.core.extensions.navigateToUser
 import com.team23.post.R
+import com.team23.post.ui.adapters.CommentListAdapter
 import com.team23.post.ui.viewmodels.PostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -25,6 +28,7 @@ class PostFragment: Fragment() {
     @Inject
     lateinit var viewModelAssistedFactory: PostViewModel.Factory
     private lateinit var postViewModel: PostViewModel
+    private lateinit var commentRecyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +48,7 @@ class PostFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        commentRecyclerView = requireView().findViewById(R.id.comments_list)
         initViews()
         initObservers()
     }
@@ -51,6 +56,12 @@ class PostFragment: Fragment() {
     private fun initViews() {
         requireView().findViewById<Toolbar>(R.id.post_toolbar).setNavigationOnClickListener {
             findNavController().popBackStack()
+        }
+        commentRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = CommentListAdapter().apply {
+                onUserClick = { userId -> findNavController().navigateToUser(userId) }
+            }
         }
     }
 
@@ -76,6 +87,10 @@ class PostFragment: Fragment() {
             requireView().findViewById<TextView>(R.id.item_likes_amount).text = it.likesAmount.toString()
             requireView().findViewById<TextView>(R.id.item_comments_amount).text = it.commentsAmount.toString()
             requireView().findViewById<TextView>(R.id.item_tags_amount).text = it.tagsAmount.toString()
+        }
+        postViewModel.comments.observe(viewLifecycleOwner) {
+            println("socialProfile: comments" + it)
+            (commentRecyclerView.adapter as CommentListAdapter).submitList(it)
         }
     }
 

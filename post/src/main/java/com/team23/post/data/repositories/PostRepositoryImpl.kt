@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class PostRepositoryImpl@Inject constructor(
+class PostRepositoryImpl @Inject constructor(
     private val postService: PostService
 ) : PostRepository {
     override suspend fun getPostById(postId: String) =

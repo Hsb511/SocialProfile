@@ -14,5 +14,9 @@ fun LocalDateTime.toString(format: String): String =
     this.format(DateTimeFormatter.ofPattern(format))
 
 fun String.fromISO8601() = this.toLocalDateTime(ISO_8601_FORMAT)
-fun LocalDateTime.toBirthDate() = this.toString(BIRTHDATE_FORMAT)
 fun String.fromISO8601toReadableDateTime() = this.fromISO8601().toString(READABLE_DATE_TIME_FORMAT)
+
+fun LocalDateTime.toBirthDate() = this.toString(BIRTHDATE_FORMAT)
+
+// TODO
+fun LocalDateTime.toDuration() = "13 j"

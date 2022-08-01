@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.team23.post.domain.usecases.GetCommentsUseCase
 import com.team23.post.domain.usecases.GetPostDataUseCase
+import com.team23.post.ui.viewobjects.CommentVO
 import com.team23.post.ui.viewobjects.PostVO
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -14,9 +16,11 @@ import kotlinx.coroutines.launch
 
 class PostViewModel @AssistedInject constructor(
     @Assisted private val postId: String?,
-    private val getPostDataUseCase: GetPostDataUseCase
+    private val getPostDataUseCase: GetPostDataUseCase,
+    private val getCommentsUseCase: GetCommentsUseCase
 ): ViewModel() {
     var post = MutableLiveData<PostVO>()
+    var comments = MutableLiveData<List<CommentVO>>()
     var isLoading = MutableLiveData(true)
 
     init {
@@ -24,6 +28,9 @@ class PostViewModel @AssistedInject constructor(
             viewModelScope.launch {
                 post.value = getPostDataUseCase.execute(postId)
                 isLoading.value = false
+            }
+            viewModelScope.launch {
+                comments.value = getCommentsUseCase.execute(postId)
             }
         } else {
             // TODO SHOW ERROR
