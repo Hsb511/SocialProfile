@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.team23.home.R
 import androidx.navigation.fragment.findNavController
+import com.team23.core.extensions.handleVisibility
 import com.team23.core.extensions.navigateToPost
 import com.team23.core.extensions.navigateToUser
 import com.team23.home.ui.adapters.PostListAdapter
@@ -52,12 +53,7 @@ class HomeFragment : Fragment() {
 
     private fun initObservers() {
         homeViewModel.isLoading.observe(viewLifecycleOwner) {
-            requireView().findViewById<ProgressBar>(R.id.progress_home).visibility =
-            if (it) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
+            requireView().findViewById<ProgressBar>(R.id.progress_home).handleVisibility(it)
         }
         homeViewModel.posts.observe(viewLifecycleOwner) {
             (postRecyclerView.adapter as PostListAdapter).submitList(it)

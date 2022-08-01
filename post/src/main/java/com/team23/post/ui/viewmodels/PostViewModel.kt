@@ -17,11 +17,13 @@ class PostViewModel @AssistedInject constructor(
     private val getPostDataUseCase: GetPostDataUseCase
 ): ViewModel() {
     var post = MutableLiveData<PostVO>()
+    var isLoading = MutableLiveData(true)
 
     init {
         if (postId != null) {
             viewModelScope.launch {
                 post.value = getPostDataUseCase.execute(postId)
+                isLoading.value = false
             }
         } else {
             // TODO SHOW ERROR

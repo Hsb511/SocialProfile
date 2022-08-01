@@ -5,11 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.divider.MaterialDivider
+import com.team23.core.extensions.handleVisibility
 import com.team23.core.extensions.navigateToUser
 import com.team23.post.R
 import com.team23.post.ui.viewmodels.PostViewModel
@@ -51,6 +55,13 @@ class PostFragment: Fragment() {
     }
 
     private fun initObservers() {
+        postViewModel.isLoading.observe(viewLifecycleOwner) {
+            requireView().findViewById<ProgressBar>(R.id.progress_post).handleVisibility(it)
+            requireView().findViewById<MaterialDivider>(R.id.post_picture_divider).handleVisibility(!it)
+            requireView().findViewById<LinearLayout>(R.id.likes_tag).handleVisibility(!it)
+            requireView().findViewById<LinearLayout>(R.id.comments_tag).handleVisibility(!it)
+            requireView().findViewById<LinearLayout>(R.id.tags_tag).handleVisibility(!it)
+        }
         postViewModel.post.observe(viewLifecycleOwner) {
             requireView().findViewById<ImageView>(R.id.post_picture).setImageBitmap(it.postPicture)
             requireView().findViewById<ImageView>(R.id.user_picture).apply {
