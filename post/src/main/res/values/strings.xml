@@ -4,4 +4,6 @@
     <string name="post_image">post image</string>
     <string name="icon_item_info">icon item info</string>
     <string name="post_title">Post</string>
+    <string name="comment_separator">-</string>
+    <string name="comment_user_picture_description">user picture</string>
 </resources>
