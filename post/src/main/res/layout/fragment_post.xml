@@ -243,6 +243,22 @@
 
         </LinearLayout>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tags_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="8dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/tags_tag"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tags_tag"
+            app:layout_constraintTop_toTopOf="@+id/tags_tag"
+            tools:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/item_tag"
+            tools:itemCount="3"
+            tools:visibility="visible"/>
+
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/post_comment_divider"
             android:layout_width="match_parent"
@@ -260,7 +276,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/post_comment_divider"
-            tools:listitem="@layout/item_comment" />
+            tools:listitem="@layout/item_comment"
+            tools:visibility="visible"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
