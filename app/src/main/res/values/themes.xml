@@ -1,4 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <attr name="ic_comments_primary" format="reference"/>
     <attr name="ic_thumb_up_primary" format="reference"/>
     <attr name="ic_arrow_back" format="reference"/>
     <!-- Base application theme. -->
@@ -19,6 +20,7 @@
         <!-- Customize your theme here. -->
         <item name="ic_arrow_back">@drawable/ic_arrow_back_dark</item>
         <item name="ic_thumb_up_primary">@drawable/ic_thumb_up_primary_light</item>
+        <item name="ic_comments_primary">@drawable/ic_comments_primary_light</item>
 
     </style>
 </resources>

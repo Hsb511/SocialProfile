@@ -74,7 +74,11 @@ class PostFragment : Fragment() {
                 onUserClick = { userId -> findNavController().navigateToUser(userId) }
             }
         }
-        commentsButton.setOnClickListener { commentRecyclerView.toggle() }
+        commentsButton.setOnClickListener {
+            requireView().findViewById<ImageView>(R.id.item_comments_icon).toggle()
+            requireView().findViewById<ImageView>(R.id.item_comments_icon_colored).toggle()
+            commentRecyclerView.toggle()
+        }
         tagsButton.setOnClickListener { /* TODO */ }
     }
 
