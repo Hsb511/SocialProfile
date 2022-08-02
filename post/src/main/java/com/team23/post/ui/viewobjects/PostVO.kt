@@ -10,5 +10,5 @@ data class PostVO (
     val postDate: String,
     val postDescription: String,
     val likesAmount: Int,
-    val tagsAmount: Int
+    val tags: List<String>
 )

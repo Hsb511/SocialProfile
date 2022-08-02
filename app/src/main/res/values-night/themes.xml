@@ -1,7 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <attr name="ic_comments_primary" format="reference"/>
     <attr name="ic_arrow_back" format="reference"/>
     <attr name="ic_thumb_up_primary" format="reference"/>
+    <attr name="ic_comments_primary" format="reference"/>
+    <attr name="ic_tags_primary" format="reference"/>
     <!-- Base application theme. -->
     <style name="Theme.SocialProfile" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
@@ -21,5 +22,6 @@
         <item name="ic_arrow_back">@drawable/ic_arrow_back_light</item>
         <item name="ic_thumb_up_primary">@drawable/ic_thumb_up_primary_dark</item>
         <item name="ic_comments_primary">@drawable/ic_comments_primary_dark</item>
+        <item name="ic_tags_primary">@drawable/ic_tags_primary_dark</item>
     </style>
 </resources>

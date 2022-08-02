@@ -223,11 +223,22 @@
             app:layout_constraintTop_toTopOf="@+id/comments_tag">
 
             <ImageView
+                android:id="@+id/item_tags_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:width="23dp"
                 android:height="23dp"
                 android:background="@drawable/ic_tags"
+                android:contentDescription="@string/icon_item_info" />
+
+            <ImageView
+                android:id="@+id/item_tags_icon_colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:width="23dp"
+                android:height="23dp"
+                android:visibility="gone"
+                android:background="?attr/ic_tags_primary"
                 android:contentDescription="@string/icon_item_info" />
 
             <TextView

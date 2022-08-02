@@ -16,7 +16,7 @@ class GetPostDataUseCase @Inject constructor(
             postDate = it.publishDate,
             postDescription = it.text,
             likesAmount = it.likes,
-            tagsAmount = it.tags.size
+            tags = it.tags
         )
     }
 }

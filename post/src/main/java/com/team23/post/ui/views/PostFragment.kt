@@ -21,6 +21,7 @@ import com.team23.core.extensions.navigateToUser
 import com.team23.core.extensions.toggle
 import com.team23.post.R
 import com.team23.post.ui.adapters.CommentListAdapter
+import com.team23.post.ui.adapters.TagsListAdapter
 import com.team23.post.ui.viewmodels.PostViewModel
 import com.team23.post.ui.viewobjects.PostVO
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +37,7 @@ class PostFragment : Fragment() {
     private lateinit var likesAmount: TextView
     private lateinit var commentsButton: LinearLayout
     private lateinit var tagsButton: LinearLayout
+    private lateinit var tagsRecyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,6 +58,7 @@ class PostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         commentRecyclerView = requireView().findViewById(R.id.comments_list)
+        tagsRecyclerView = requireView().findViewById(R.id.tags_list)
         likesButton = requireView().findViewById(R.id.likes_tag)
         likesAmount = requireView().findViewById(R.id.item_likes_amount)
         commentsButton = requireView().findViewById(R.id.comments_tag)
@@ -74,12 +77,20 @@ class PostFragment : Fragment() {
                 onUserClick = { userId -> findNavController().navigateToUser(userId) }
             }
         }
+        tagsRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+            adapter = TagsListAdapter()
+        }
         commentsButton.setOnClickListener {
             requireView().findViewById<ImageView>(R.id.item_comments_icon).toggle()
             requireView().findViewById<ImageView>(R.id.item_comments_icon_colored).toggle()
             commentRecyclerView.toggle()
         }
-        tagsButton.setOnClickListener { /* TODO */ }
+        tagsButton.setOnClickListener {
+            requireView().findViewById<ImageView>(R.id.item_tags_icon).toggle()
+            requireView().findViewById<ImageView>(R.id.item_tags_icon_colored).toggle()
+            tagsRecyclerView.toggle()
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -108,9 +119,10 @@ class PostFragment : Fragment() {
             requireView().findViewById<TextView>(R.id.item_likes_amount).text =
                 post.likesAmount.toString()
             requireView().findViewById<TextView>(R.id.item_tags_amount).text =
-                post.tagsAmount.toString()
+                post.tags.size.toString()
             likesButton.setOnClickListener { likePost(post) }
             likePost(post)
+            (tagsRecyclerView.adapter as TagsListAdapter).submitList(post.tags)
         }
         postViewModel.comments.observe(viewLifecycleOwner) {
             (commentRecyclerView.adapter as CommentListAdapter).submitList(it)
