@@ -1,5 +1,6 @@
 package com.team23.post.ui.views
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,18 +18,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.divider.MaterialDivider
 import com.team23.core.extensions.handleVisibility
 import com.team23.core.extensions.navigateToUser
+import com.team23.core.extensions.toggle
 import com.team23.post.R
 import com.team23.post.ui.adapters.CommentListAdapter
 import com.team23.post.ui.viewmodels.PostViewModel
+import com.team23.post.ui.viewobjects.PostVO
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class PostFragment: Fragment() {
+class PostFragment : Fragment() {
     @Inject
     lateinit var viewModelAssistedFactory: PostViewModel.Factory
     private lateinit var postViewModel: PostViewModel
     private lateinit var commentRecyclerView: RecyclerView
+    private lateinit var likesButton: LinearLayout
+    private lateinit var likesAmount: TextView
+    private lateinit var commentsButton: LinearLayout
+    private lateinit var tagsButton: LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,6 +56,10 @@ class PostFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         commentRecyclerView = requireView().findViewById(R.id.comments_list)
+        likesButton = requireView().findViewById(R.id.likes_tag)
+        likesAmount = requireView().findViewById(R.id.item_likes_amount)
+        commentsButton = requireView().findViewById(R.id.comments_tag)
+        tagsButton = requireView().findViewById(R.id.tags_tag)
         initViews()
         initObservers()
     }
@@ -63,35 +74,59 @@ class PostFragment: Fragment() {
                 onUserClick = { userId -> findNavController().navigateToUser(userId) }
             }
         }
+        commentsButton.setOnClickListener { commentRecyclerView.toggle() }
+        tagsButton.setOnClickListener { /* TODO */ }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initObservers() {
         postViewModel.isLoading.observe(viewLifecycleOwner) {
             requireView().findViewById<ProgressBar>(R.id.progress_post).handleVisibility(it)
-            requireView().findViewById<MaterialDivider>(R.id.post_picture_divider).handleVisibility(!it)
-            requireView().findViewById<LinearLayout>(R.id.likes_tag).handleVisibility(!it)
-            requireView().findViewById<LinearLayout>(R.id.comments_tag).handleVisibility(!it)
-            requireView().findViewById<LinearLayout>(R.id.tags_tag).handleVisibility(!it)
+            requireView().findViewById<MaterialDivider>(R.id.post_picture_divider)
+                .handleVisibility(!it)
+            likesButton.handleVisibility(!it)
+            commentsButton.handleVisibility(!it)
+            tagsButton.handleVisibility(!it)
+            requireView().findViewById<MaterialDivider>(R.id.post_comment_divider)
+                .handleVisibility(!it)
         }
-        postViewModel.post.observe(viewLifecycleOwner) {
-            requireView().findViewById<ImageView>(R.id.post_picture).setImageBitmap(it.postPicture)
+        postViewModel.post.observe(viewLifecycleOwner) { post ->
+            requireView().findViewById<ImageView>(R.id.post_picture).setImageBitmap(post.postPicture)
             requireView().findViewById<ImageView>(R.id.user_picture).apply {
-                this.setImageBitmap(it.userPicture)
+                this.setImageBitmap(post.userPicture)
                 this.setOnClickListener { _ ->
-                    findNavController().navigateToUser(it.userId)
+                    findNavController().navigateToUser(post.userId)
                 }
             }
-            requireView().findViewById<TextView>(R.id.user_name).text = it.username
-            requireView().findViewById<TextView>(R.id.post_date).text = it.postDate
-            requireView().findViewById<TextView>(R.id.post_description).text = it.postDescription
-            requireView().findViewById<TextView>(R.id.item_likes_amount).text = it.likesAmount.toString()
-            requireView().findViewById<TextView>(R.id.item_comments_amount).text = it.commentsAmount.toString()
-            requireView().findViewById<TextView>(R.id.item_tags_amount).text = it.tagsAmount.toString()
+            requireView().findViewById<TextView>(R.id.user_name).text = post.username
+            requireView().findViewById<TextView>(R.id.post_date).text = post.postDate
+            requireView().findViewById<TextView>(R.id.post_description).text = post.postDescription
+            requireView().findViewById<TextView>(R.id.item_likes_amount).text =
+                post.likesAmount.toString()
+            requireView().findViewById<TextView>(R.id.item_tags_amount).text =
+                post.tagsAmount.toString()
+            likesButton.setOnClickListener { likePost(post) }
+            likePost(post)
         }
         postViewModel.comments.observe(viewLifecycleOwner) {
-            println("socialProfile: comments" + it)
             (commentRecyclerView.adapter as CommentListAdapter).submitList(it)
+
+            requireView().findViewById<TextView>(R.id.item_comments_amount).text =
+                it.size.toString()
         }
+    }
+
+    private fun likePost(postVO: PostVO) {
+        var currentLikesAmount = likesAmount.text.toString().toInt()
+        val isNotLiked = postVO.likesAmount == currentLikesAmount
+        requireView().findViewById<ImageView>(R.id.item_likes_icon).handleVisibility(isNotLiked)
+        requireView().findViewById<ImageView>(R.id.item_likes_icon_colored).handleVisibility(!isNotLiked)
+        if (!isNotLiked) {
+            currentLikesAmount ++
+        } else {
+            currentLikesAmount --
+        }
+        likesAmount.text = "$currentLikesAmount"
     }
 
 }

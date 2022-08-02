@@ -125,11 +125,22 @@
         app:layout_constraintTop_toBottomOf="@+id/post_description">
 
         <ImageView
+            android:id="@+id/item_likes_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="23dp"
             android:height="23dp"
             android:background="@drawable/ic_thumb_up"
+            android:contentDescription="@string/icon_item_info"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/item_likes_icon_colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="23dp"
+            android:height="23dp"
+            android:background="?attr/ic_thumb_up_primary"
             android:contentDescription="@string/icon_item_info" />
 
         <TextView
@@ -229,6 +240,7 @@
         android:id="@+id/comments_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/post_comment_divider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

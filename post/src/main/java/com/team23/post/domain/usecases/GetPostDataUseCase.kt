@@ -16,7 +16,6 @@ class GetPostDataUseCase @Inject constructor(
             postDate = it.publishDate,
             postDescription = it.text,
             likesAmount = it.likes,
-            commentsAmount = 23, // TODO CHANGE THAT AFTER GETTING COMMENTS LIST
             tagsAmount = it.tags.size
         )
     }

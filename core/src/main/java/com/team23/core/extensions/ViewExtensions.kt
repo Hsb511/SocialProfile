@@ -10,3 +10,11 @@ fun View.handleVisibility(isDisplayed: Boolean) {
             View.GONE
         }
 }
+
+fun View.toggle() {
+    this.visibility = if (this.visibility != View.VISIBLE) {
+        View.VISIBLE
+    } else {
+        View.GONE
+    }
+}

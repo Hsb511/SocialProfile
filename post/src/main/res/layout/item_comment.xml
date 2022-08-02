@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:textStyle="bold"
+            android:textColor="?attr/colorOnSurface"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@tools:sample/full_names" />
@@ -38,6 +39,7 @@
             android:paddingHorizontal="8dp"
             android:text="@string/comment_separator"
             android:textSize="12sp"
+            android:textColor="?attr/colorOnSurface"
             app:layout_constraintBottom_toBottomOf="@id/comment_username"
             app:layout_constraintStart_toEndOf="@id/comment_username"
             app:layout_constraintTop_toTopOf="@id/comment_username" />
@@ -47,6 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
+            android:textColor="?attr/colorOnSurface"
             app:layout_constraintBottom_toBottomOf="@+id/comment_username"
             app:layout_constraintStart_toEndOf="@id/comment_separator"
             app:layout_constraintTop_toTopOf="@+id/comment_username"
@@ -57,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="?attr/colorOnSurface"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/comment_username"
             tools:text="@tools:sample/lorem/random" />
