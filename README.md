@@ -4,25 +4,16 @@ This application is an exercise to learn different technical points. It features
 
 ## I) Main features
 
-This application is divided into 3 main screens.
+This application is divided into 3 main screens :
+- **home** : A list of posts is displayed. A post consists in a animal picture (mainly dog) with an extract of the description posted by a user at a certain date.
+- **post** : With the details of the post: the big picture, the full description the likes, the comments (displayed or not) and the tags (displayed or not). It can be open by clicking on the picture in the home screen
+- **user** : With the personal information of the user. It can be open from any click on the user picture (either from home or post screen.
 
-### 1) Home screen: posts list
 
-| home screen in light mode | home screen in dark mode |
-|---|---|
-| ![home light](screenshots/home_light.jpg) | ![home dark](screenshots/home_dark.jpg) |
-
-### 2) Post screen: post details & comments
-
-| post screen in light mode | post screen in dark mode |
-|---|---|
-| ![post light](screenshots/post_light.jpg) | ![post dark](screenshots/post_dark.jpg) |
-
-### 3) User screen: user personnal data
-
-| user screen in light mode | user screen in dark mode |
-|---|---|
-| ![user light](screenshots/user_light.jpg) | ![user dark](screenshots/user_dark.jpg) |
+| home screen | post screen | user screen |
+|:-----------:|:-----------:|:-----------:|
+| ![home light](screenshots/home_light.jpg) | ![post light](screenshots/post_light.jpg) | ![user light](screenshots/user_light.jpg) |
+| ![home dark](screenshots/home_dark.jpg) | ![post dark](screenshots/post_dark.jpg) | ![user dark](screenshots/user_dark.jpg) |
 
 ## II) Technical points
 
