@@ -4,6 +4,26 @@ This application is an exercise to learn different technical points. It features
 
 ## I) Main features
 
+This application is divided into 3 main screens.
+
+### 1) Home screen: posts list
+
+| home screen in light mode | home screen in dark mode |
+|---|---|
+| ![home light](screenshots/home_light.jpg) | ![home dark](screenshots/home_dark.jpg) |
+
+### 2) Post screen: post details & comments
+
+| post screen in light mode | post screen in dark mode |
+|---|---|
+| ![post light](screenshots/post_light.jpg) | ![post dark](screenshots/post_dark.jpg) |
+
+### 3) User screen: user personnal data
+
+| user screen in light mode | user screen in dark mode |
+|---|---|
+| ![user light](screenshots/user_light.jpg) | ![user dark](screenshots/user_dark.jpg) |
+
 ## II) Technical points
 
 ### 1) Multi-module project
@@ -21,8 +41,20 @@ I achieved that by using nested graphs and deeplink. Also a challenge was that I
 
 Here are the android developer articles I read on [multi-module](https://developer.android.com/guide/navigation/navigation-multi-module), [deep-link](https://developer.android.com/guide/navigation/navigation-deep-link) and [interoperability](https://developer.android.com/jetpack/compose/navigation#interoperability) of navigation. 
 
+```kotlin
+// const val NAVIGATION = "2.5.1"
+implementation("androidx.navigation:navigation-runtime-ktx:${Versions.NAVIGATION}")
+implementation("androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}")
+```
+
 ### 2) Clean Architecture
 This application tend to implement a **clean architecture**
+
+```kotlin
+// const val HILT = "2.41"
+implementation("com.google.dagger:hilt-android:${Versions.HILT}")
+kapt("com.google.dagger:hilt-android-compiler:${Versions.HILT}")
+```
 
 ### 3) Hybrid UI components
 To cover a large variety of UI I chose to have an hybrid UI, meaning XML view-based components and compose components:
@@ -31,7 +63,11 @@ To cover a large variety of UI I chose to have an hybrid UI, meaning XML view-ba
 The list of posts is displayed in a `RecyclerView` with a `ListAdapter`. Here are the useful links I used on [Medium](https://medium.com/geekculture/android-listadapter-a-better-implementation-for-the-recyclerview-1af1826a7d21) and on the [official Android doc](https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter)
 
 
-The screen with the post content contains a `chain` in a `ConstraintLayou`. I used these great tutorials on [Medium](https://medium.com/@nomanr/constraintlayout-chains-4f3b58ea15bb) and on [constraintLayout.com](https://constraintlayout.com/basics/create_chains.html)
+The screen with the post content contains a `chain` in a `ConstraintLayout`. I used these great tutorials on [Medium](https://medium.com/@nomanr/constraintlayout-chains-4f3b58ea15bb) and on [constraintLayout.com](https://constraintlayout.com/basics/create_chains.html)
+
+```kotlin
+implementation("androidx.core:core-ktx:1.8.0")
+```
 
 #### b) Compose components
 
@@ -41,8 +77,25 @@ The `Scaffold` are one useful tool provided by Jetpack Compose, to understand it
 
 Also to know how to handle lists and grids (similarily to the `RecyclerView`). I recommend to read [this](https://developer.android.com/jetpack/compose/lists)
 
+```kotlin
+// const val COMPOSE = "1.2.0-alpha08"
+implementation("androidx.compose.compiler:compiler:${Versions.COMPOSE}")
+implementation("androidx.compose.runtime:runtime-livedata:${Versions.COMPOSE}")
+implementation("androidx.compose.material:material:${Versions.COMPOSE}")
+implementation("androidx.compose.ui:ui:${Versions.COMPOSE}")
+implementation("androidx.compose.ui:ui-viewbinding:${Versions.COMPOSE}")
+implementation("androidx.compose.ui:ui-tooling-preview:1.1.1")
+implementation("androidx.compose.ui:ui-tooling:${Versions.COMPOSE}")
+```
+
 ### 4) Coroutines 
 
-The [kotlin doc](https://kotlinlang.org/docs/coroutines-guide.html) and the[Android doc](https://developer.android.com/kotlin/coroutines)
+The [kotlin doc](https://kotlinlang.org/docs/coroutines-guide.html) and the [Android doc](https://developer.android.com/kotlin/coroutines)
+
+A [great tutorial](https://proandroiddev.com/kotlin-flow-on-android-quick-guide-76667e872166) for understanding MVVM + Coroutine Flow + Retrofit 
 
 This [great video](https://www.youtube.com/watch?v=KMb0Fs8rCRs&t) to understand the testing of coroutine. Be aware that some of the library shown here is deprecated
+
+```kotlin
+implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+```
