@@ -52,7 +52,7 @@ To cover a large variety of UI I chose to have an hybrid UI, meaning XML view-ba
 
 #### a) XML view-based components 
 The list of posts is displayed in a `RecyclerView` with a `ListAdapter`. Here are the useful links I used on [Medium](https://medium.com/geekculture/android-listadapter-a-better-implementation-for-the-recyclerview-1af1826a7d21) and on the [official Android doc](https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter)
-
+For the `DiffUtil.ItemCallback` I read this article on [Medium](https://jermainedilao.medium.com/demystifying-diffutil-itemcallback-class-8c0201cc69b1)
 
 The screen with the post content contains a `chain` in a `ConstraintLayout`. I used these great tutorials on [Medium](https://medium.com/@nomanr/constraintlayout-chains-4f3b58ea15bb) and on [constraintLayout.com](https://constraintlayout.com/basics/create_chains.html)
 

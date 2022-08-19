@@ -13,8 +13,8 @@ import coil.load
 import com.team23.home.R
 import com.team23.home.domain.models.PostModel
 
-class PostListAdapter: ListAdapter<PostModel, PostListAdapter.PostViewHolder>(PostDiffCallBack()) {
-    inner class PostViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class PostListAdapter : ListAdapter<PostModel, PostListAdapter.PostViewHolder>(PostDiffCallBack()) {
+    inner class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val userPicture: ImageView = itemView.findViewById(R.id.user_picture)
         private val userName: TextView = itemView.findViewById(R.id.user_name)
         private val postDate: TextView = itemView.findViewById(R.id.post_date)
@@ -43,10 +43,27 @@ class PostListAdapter: ListAdapter<PostModel, PostListAdapter.PostViewHolder>(Po
     var onUserClick: ((String) -> Unit)? = null
     var onPostClick: ((String) -> Unit)? = null
 
-    private class PostDiffCallBack: DiffUtil.ItemCallback<PostModel>() {
-        override fun areContentsTheSame(oldItem: PostModel, newItem: PostModel) = oldItem == newItem
+    private class PostDiffCallBack : DiffUtil.ItemCallback<PostModel>() {
+        /**
+         * Called to check whether two objects represent the same item.
+         * For example, if your items have unique ids, this method should check their id equality.
+         */
+        override fun areItemsTheSame(oldItem: PostModel, newItem: PostModel) =
+            oldItem.id == newItem.id
 
-        override fun areItemsTheSame(oldItem: PostModel, newItem: PostModel) = oldItem == newItem
+        /**
+         * Called to check whether two items have the same data.
+         * For example, if you are using DiffUtil with a RecyclerView.Adapter, you should
+         * return whether the items' visual representations are the same.
+         */
+        override fun areContentsTheSame(oldItem: PostModel, newItem: PostModel) =
+            oldItem.ownerPictureUrl == newItem.ownerPictureUrl &&
+                    oldItem.ownerName == newItem.ownerName &&
+                    oldItem.publishDate == newItem.publishDate &&
+                    oldItem.imageUrl == newItem.imageUrl &&
+                    oldItem.text == newItem.text
+
+
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
