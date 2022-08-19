@@ -5,9 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.team23.home.R
 import com.team23.home.domain.models.PostModel
 
@@ -20,17 +22,17 @@ class PostListAdapter: ListAdapter<PostModel, PostListAdapter.PostViewHolder>(Po
         private val postDescription: TextView = itemView.findViewById(R.id.post_description)
 
         fun bind(post: PostModel) {
-            userPicture.apply {
-                this.setImageBitmap(post.ownerPicture)
-                this.setOnClickListener {
+            userPicture.let {
+                it.load(post.ownerPictureUrl.toUri().buildUpon().scheme("https").build())
+                it.setOnClickListener {
                     onUserClick?.invoke(post.ownerId)
                 }
             }
             userName.text = post.ownerName
             postDate.text = post.publishDate
-            postImage.apply {
-                this.setImageBitmap(post.image)
-                this.setOnClickListener {
+            postImage.let {
+                it.load(post.imageUrl.toUri().buildUpon().scheme("https").build())
+                it.setOnClickListener {
                     onPostClick?.invoke(post.id)
                 }
             }

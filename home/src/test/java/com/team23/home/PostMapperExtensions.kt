@@ -67,13 +67,13 @@ class PostMapperExtensions {
             // THEN
             assertEquals("23", postModel.id)
             assertEquals("WOW", postModel.text)
-            assertNotNull(postModel.image)
+            assertNotNull(postModel.imageUrl)
             assertEquals(23, postModel.likes)
             assertEquals(listOf("test", "wow"), postModel.tags)
             assertEquals("24 mai 2020 14:53:17", postModel.publishDate)
             assertEquals("7", postModel.ownerId)
             assertEquals("Super Man", postModel.ownerName)
-            assertNotNull(postModel.ownerPicture)
+            assertNotNull(postModel.ownerPictureUrl)
         }
     }
 }

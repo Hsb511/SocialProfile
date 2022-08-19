@@ -16,7 +16,7 @@ class PostRepositoryImpl @Inject constructor(
     override fun getPosts(): Flow<List<PostModel>> = flow {
         val postModels = withContext(Dispatchers.IO) { postService.getPosts(0u) }.let { response ->
             if (response.isSuccessful) {
-                response.body()!!.data.map { it.toModel(Dispatchers.IO) }
+                response.body()!!.data.map { it.toModel() }
             } else {
                 emptyList()
             }
