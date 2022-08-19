@@ -35,10 +35,6 @@ class PostFragment : Fragment() {
     lateinit var viewModelAssistedFactory: PostViewModel.Factory
     private lateinit var postViewModel: PostViewModel
     private lateinit var commentRecyclerView: RecyclerView
-    private lateinit var likesButton: LinearLayout
-    private lateinit var likesAmount: TextView
-    private lateinit var commentsButton: LinearLayout
-    private lateinit var tagsButton: LinearLayout
     private lateinit var tagsRecyclerView: RecyclerView
 
     override fun onCreateView(
@@ -61,10 +57,6 @@ class PostFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         commentRecyclerView = requireView().findViewById(R.id.comments_list)
         tagsRecyclerView = requireView().findViewById(R.id.tags_list)
-        likesButton = requireView().findViewById(R.id.likes_tag)
-        likesAmount = requireView().findViewById(R.id.item_likes_amount)
-        commentsButton = requireView().findViewById(R.id.comments_tag)
-        tagsButton = requireView().findViewById(R.id.tags_tag)
         initViews()
         initObservers()
     }
@@ -83,12 +75,12 @@ class PostFragment : Fragment() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
             adapter = TagsListAdapter()
         }
-        commentsButton.setOnClickListener {
+        requireView().findViewById<LinearLayout>(R.id.comments_tag).setOnClickListener {
             requireView().findViewById<ImageView>(R.id.item_comments_icon).toggle()
             requireView().findViewById<ImageView>(R.id.item_comments_icon_colored).toggle()
             commentRecyclerView.toggle()
         }
-        tagsButton.setOnClickListener {
+        requireView().findViewById<LinearLayout>(R.id.tags_tag).setOnClickListener {
             requireView().findViewById<ImageView>(R.id.item_tags_icon).toggle()
             requireView().findViewById<ImageView>(R.id.item_tags_icon_colored).toggle()
             tagsRecyclerView.toggle()
@@ -101,9 +93,9 @@ class PostFragment : Fragment() {
             requireView().findViewById<ProgressBar>(R.id.progress_post).handleVisibility(it)
             requireView().findViewById<MaterialDivider>(R.id.post_picture_divider)
                 .handleVisibility(!it)
-            likesButton.handleVisibility(!it)
-            commentsButton.handleVisibility(!it)
-            tagsButton.handleVisibility(!it)
+            requireView().findViewById<LinearLayout>(R.id.likes_tag).handleVisibility(!it)
+            requireView().findViewById<LinearLayout>(R.id.comments_tag).handleVisibility(!it)
+            requireView().findViewById<LinearLayout>(R.id.tags_tag).handleVisibility(!it)
             requireView().findViewById<MaterialDivider>(R.id.post_comment_divider)
                 .handleVisibility(!it)
         }
@@ -123,7 +115,7 @@ class PostFragment : Fragment() {
                 post.likesAmount.toString()
             requireView().findViewById<TextView>(R.id.item_tags_amount).text =
                 post.tags.size.toString()
-            likesButton.setOnClickListener { likePost(post) }
+            requireView().findViewById<LinearLayout>(R.id.likes_tag).setOnClickListener { likePost(post) }
             likePost(post)
             (tagsRecyclerView.adapter as TagsListAdapter).submitList(post.tags)
         }
@@ -135,8 +127,12 @@ class PostFragment : Fragment() {
         }
     }
 
+    /**
+     * Method for UI purpose only should be
+     */
     private fun likePost(postVO: PostVO) {
-        var currentLikesAmount = likesAmount.text.toString().toInt()
+        val itemLikes = requireView().findViewById<TextView>(R.id.item_likes_amount)
+        var currentLikesAmount = itemLikes.text.toString().toInt()
         val isNotLiked = postVO.likesAmount == currentLikesAmount
         requireView().findViewById<ImageView>(R.id.item_likes_icon).handleVisibility(isNotLiked)
         requireView().findViewById<ImageView>(R.id.item_likes_icon_colored)
@@ -146,7 +142,7 @@ class PostFragment : Fragment() {
         } else {
             currentLikesAmount--
         }
-        likesAmount.text = "$currentLikesAmount"
+        itemLikes.text = "$currentLikesAmount"
     }
 
 }
