@@ -13,7 +13,7 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun getUserById(userId: String): UserModel? {
         val response = withContext(Dispatchers.IO) { userService.getUserData(userId) }
         return if (response.isSuccessful) {
-            response.body()?.toModel(Dispatchers.IO)
+            response.body()?.toModel()
         } else {
             null
         }

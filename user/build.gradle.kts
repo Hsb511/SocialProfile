@@ -40,6 +40,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview:1.1.1")
     implementation("androidx.compose.ui:ui-tooling:${Versions.COMPOSE}")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0-alpha01")
+    implementation("io.coil-kt:coil-compose:2.0.0-rc01")
     debugImplementation("androidx.customview:customview:1.2.0-alpha01")
     debugImplementation("androidx.customview:customview-poolingcontainer:1.0.0-rc01")
 
