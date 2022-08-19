@@ -7,15 +7,15 @@ import com.team23.core.extensions.toRoundBitmap
 import com.team23.post.domain.models.PostModel
 import kotlinx.coroutines.CoroutineDispatcher
 
-suspend fun PostDTO.toModel(dispatcher: CoroutineDispatcher) = PostModel(
+fun PostDTO.toModel() = PostModel(
     id = id,
     text = text,
-    image = image.downloadBitmap(dispatcher),
+    image = image,
     likes = likes,
     link = link,
     tags = tags,
     publishDate = publishDate.fromISO8601toReadableDateTime(),
     ownerId = owner.id,
     ownerName = "${owner.firstName} ${owner.lastName}",
-    ownerPicture = owner.picture.downloadBitmap(dispatcher)?.toRoundBitmap()
+    ownerPicture = owner.picture
 )

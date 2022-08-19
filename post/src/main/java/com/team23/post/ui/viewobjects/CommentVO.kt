@@ -1,9 +1,8 @@
 package com.team23.post.ui.viewobjects
 
-import android.graphics.Bitmap
-
 data class CommentVO(
-    val userPicture: Bitmap?,
+    val id: String,
+    val userPictureUrl: String,
     val username: String,
     val userId: String,
     val duration: String,

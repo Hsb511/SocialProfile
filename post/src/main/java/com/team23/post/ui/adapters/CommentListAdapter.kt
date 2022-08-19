@@ -5,9 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.team23.post.R
 import com.team23.post.ui.viewobjects.CommentVO
 
@@ -20,9 +22,9 @@ class CommentListAdapter :
         private val commentText: TextView = itemView.findViewById(R.id.comment_text)
 
         fun bind(comment: CommentVO) {
-            userPicture.apply {
-                this.setImageBitmap(comment.userPicture)
-                this.setOnClickListener {
+            userPicture.let {
+                it.load(comment.userPictureUrl.toUri().buildUpon().scheme("https").build())
+                it.setOnClickListener {
                     onUserClick?.invoke(comment.userId)
                 }
             }
@@ -35,9 +37,14 @@ class CommentListAdapter :
     var onUserClick: ((String) -> Unit)? = null
 
     private class PostDiffCallBack : DiffUtil.ItemCallback<CommentVO>() {
-        override fun areContentsTheSame(oldItem: CommentVO, newItem: CommentVO) = oldItem == newItem
+        override fun areItemsTheSame(oldComment: CommentVO, newComment: CommentVO) =
+            oldComment.id == newComment.id
 
-        override fun areItemsTheSame(oldItem: CommentVO, newItem: CommentVO) = oldItem == newItem
+        override fun areContentsTheSame(oldComment: CommentVO, newComment: CommentVO) =
+            oldComment.userPictureUrl == newComment.userPictureUrl &&
+                    oldComment.username == newComment.username &&
+                    oldComment.duration == newComment.duration &&
+                    oldComment.text == newComment.text
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {

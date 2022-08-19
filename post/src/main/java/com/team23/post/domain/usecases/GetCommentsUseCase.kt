@@ -11,7 +11,8 @@ class GetCommentsUseCase @Inject constructor(
     suspend fun execute(postId: String): List<CommentVO> =
         commentRepository.getCommentsByPostId(postId).map {
             CommentVO(
-                userPicture = it.userPicture,
+                id = it.id,
+                userPictureUrl = it.userPictureUrl,
                 username = it.username,
                 userId = it.userId,
                 duration = it.commentDate.toDuration(),

@@ -1,10 +1,8 @@
 package com.team23.post.ui.viewobjects
 
-import android.graphics.Bitmap
-
 data class PostVO (
-    val postPicture: Bitmap?,
-    val userPicture: Bitmap?,
+    val postPicture: String,
+    val userPicture: String,
     val username: String,
     val userId: String,
     val postDate: String,

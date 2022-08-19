@@ -8,7 +8,8 @@ import com.team23.post.domain.models.CommentModel
 import kotlinx.coroutines.Dispatchers
 
 suspend fun CommentDTO.toModel() = CommentModel(
-    userPicture = owner.picture.downloadBitmap(Dispatchers.IO)?.toRoundBitmap(),
+    id = id,
+    userPictureUrl = owner.picture,
     username = "${owner.firstName} ${owner.lastName}",
     userId = owner.id,
     commentDate = publishDate.fromISO8601(),

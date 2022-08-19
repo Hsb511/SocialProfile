@@ -10,11 +10,13 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.google.android.material.divider.MaterialDivider
 import com.team23.core.extensions.handleVisibility
 import com.team23.core.extensions.navigateToUser
@@ -106,10 +108,11 @@ class PostFragment : Fragment() {
                 .handleVisibility(!it)
         }
         postViewModel.post.observe(viewLifecycleOwner) { post ->
-            requireView().findViewById<ImageView>(R.id.post_picture).setImageBitmap(post.postPicture)
-            requireView().findViewById<ImageView>(R.id.user_picture).apply {
-                this.setImageBitmap(post.userPicture)
-                this.setOnClickListener { _ ->
+            requireView().findViewById<ImageView>(R.id.post_picture)
+                .load(post.postPicture.toUri().buildUpon().scheme("https").build())
+            requireView().findViewById<ImageView>(R.id.user_picture).let {
+                it.load(post.userPicture.toUri().buildUpon().scheme("https").build())
+                it.setOnClickListener {
                     findNavController().navigateToUser(post.userId)
                 }
             }
@@ -136,11 +139,12 @@ class PostFragment : Fragment() {
         var currentLikesAmount = likesAmount.text.toString().toInt()
         val isNotLiked = postVO.likesAmount == currentLikesAmount
         requireView().findViewById<ImageView>(R.id.item_likes_icon).handleVisibility(isNotLiked)
-        requireView().findViewById<ImageView>(R.id.item_likes_icon_colored).handleVisibility(!isNotLiked)
+        requireView().findViewById<ImageView>(R.id.item_likes_icon_colored)
+            .handleVisibility(!isNotLiked)
         if (!isNotLiked) {
-            currentLikesAmount ++
+            currentLikesAmount++
         } else {
-            currentLikesAmount --
+            currentLikesAmount--
         }
         likesAmount.text = "$currentLikesAmount"
     }

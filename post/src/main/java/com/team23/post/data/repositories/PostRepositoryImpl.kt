@@ -12,7 +12,7 @@ class PostRepositoryImpl @Inject constructor(
     override suspend fun getPostById(postId: String) =
         withContext(Dispatchers.IO) { postService.getPost(postId) }.let { response ->
             if (response.isSuccessful) {
-                response.body()?.toModel(Dispatchers.IO)
+                response.body()?.toModel()
             } else {
                 null
             }

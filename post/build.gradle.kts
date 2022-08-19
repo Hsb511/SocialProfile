@@ -25,6 +25,8 @@ dependencies {
     implementation("androidx.navigation:navigation-runtime-ktx:${Versions.NAVIGATION}")
     implementation("androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}")
 
+    implementation("io.coil-kt:coil:${Versions.COIL}")
+
     implementation("androidx.core:core-ktx:${Versions.ANDROID_CORE}")
     implementation("androidx.appcompat:appcompat:${Versions.APP_COMPAT}")
     implementation("com.google.android.material:material:1.6.1")
