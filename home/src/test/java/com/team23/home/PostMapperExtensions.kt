@@ -3,24 +3,13 @@ package com.team23.home
 import com.team23.api.models.PostPreviewDTO
 import com.team23.api.models.UserPreviewDTO
 import com.team23.home.data.mappers.toModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.*
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestWatcher
-import org.junit.runner.Description
 
 @ExperimentalCoroutinesApi
 class PostMapperExtensions {
-    private val testDispatcher = UnconfinedTestDispatcher()
-
-    @get:Rule
-    var mainCoroutineRule = MainCoroutineRule(testDispatcher)
-
     @Test
     fun `given empty PostPreview, when toModel is called, then `() {
         // GIVEN
@@ -39,6 +28,20 @@ class PostMapperExtensions {
                 picture = ""
             )
         )
+
+        // WHEN
+        val post = postPreview.toModel()
+
+        // THEN
+        assertEquals("", post.id)
+        assertEquals("", post.text)
+        assertEquals("", post.imageUrl)
+        assertEquals(-1, post.likes)
+        assertEquals(emptyList<String>(), post.tags)
+        assertEquals("", post.publishDate)
+        assertEquals("", post.ownerId)
+        assertEquals(" ", post.ownerName)
+        assertEquals("", post.ownerPictureUrl)
     }
 
     @Test
@@ -60,36 +63,18 @@ class PostMapperExtensions {
             )
         )
 
-        runBlocking {
-            // WHEN
-            val postModel = postPreview.toModel(testDispatcher)
+        // WHEN
+        val postModel = postPreview.toModel()
 
-            // THEN
-            assertEquals("23", postModel.id)
-            assertEquals("WOW", postModel.text)
-            assertNotNull(postModel.imageUrl)
-            assertEquals(23, postModel.likes)
-            assertEquals(listOf("test", "wow"), postModel.tags)
-            assertEquals("24 mai 2020 14:53:17", postModel.publishDate)
-            assertEquals("7", postModel.ownerId)
-            assertEquals("Super Man", postModel.ownerName)
-            assertNotNull(postModel.ownerPictureUrl)
-        }
+        // THEN
+        assertEquals("23", postModel.id)
+        assertEquals("WOW", postModel.text)
+        assertNotNull(postModel.imageUrl)
+        assertEquals(23, postModel.likes)
+        assertEquals(listOf("test", "wow"), postModel.tags)
+        assertEquals("24 mai 2020 14:53:17", postModel.publishDate)
+        assertEquals("7", postModel.ownerId)
+        assertEquals("Super Man", postModel.ownerName)
+        assertNotNull(postModel.ownerPictureUrl)
     }
-}
-
-
-@ExperimentalCoroutinesApi
-class MainCoroutineRule(private val testDispatcher: TestDispatcher) : TestWatcher() {
-
-    override fun starting(description: Description) {
-        super.starting(description)
-        Dispatchers.setMain(testDispatcher)
-    }
-
-    override fun finished(description: Description) {
-        super.finished(description)
-        Dispatchers.resetMain()
-    }
-
 }

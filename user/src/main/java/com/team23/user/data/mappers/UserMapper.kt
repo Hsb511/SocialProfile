@@ -10,7 +10,7 @@ fun UserDTO.toModel() = UserModel(
     name = "$firstName $lastName",
     picture = picture,
     gender = gender,
-    dateOfBirth = dateOfBirth.fromISO8601(),
+    dateOfBirth = dateOfBirth.fromISO8601()!!,
     contactData = listOf(
         ContactData(ContactDataCategory.EMAIL, email),
         ContactData(ContactDataCategory.PHONE, phone),
