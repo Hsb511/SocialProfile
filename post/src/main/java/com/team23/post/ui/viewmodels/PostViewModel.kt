@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.team23.post.domain.usecases.GetCommentsUseCase
 import com.team23.post.domain.usecases.GetPostDataUseCase
+import com.team23.post.ui.mappers.toVO
 import com.team23.post.ui.viewobjects.CommentVO
 import com.team23.post.ui.viewobjects.PostVO
 import dagger.assisted.Assisted
@@ -22,7 +23,7 @@ class PostViewModel @AssistedInject constructor(
     @Assisted private val postId: String?,
     private val getPostDataUseCase: GetPostDataUseCase,
     private val getCommentsUseCase: GetCommentsUseCase
-): ViewModel() {
+) : ViewModel() {
     var post = MutableLiveData<PostVO>()
     var comments = MutableLiveData<List<CommentVO>>()
     var isLoading = MutableLiveData(true)
@@ -30,7 +31,7 @@ class PostViewModel @AssistedInject constructor(
     init {
         if (postId != null) {
             viewModelScope.launch {
-                post.value = getPostDataUseCase.execute(postId)?.also {
+                post.value = getPostDataUseCase.execute(postId)?.toVO()?.also {
                     Glide.with(application.applicationContext)
                         .load(it.postPicture)
                         .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
@@ -43,14 +44,13 @@ class PostViewModel @AssistedInject constructor(
                 isLoading.value = false
             }
             viewModelScope.launch {
-                val commentsData = getCommentsUseCase.execute(postId)
-                commentsData.forEach {
+                comments.value = getCommentsUseCase.execute(postId).map {
                     Glide.with(application.applicationContext)
                         .load(it.userPictureUrl)
                         .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                         .preload(40, 40)
+                    it.toVO()
                 }
-                comments.value = commentsData
             }
         } else {
             // TODO SHOW ERROR
