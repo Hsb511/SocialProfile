@@ -10,13 +10,13 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.divider.MaterialDivider
 import com.team23.core.extensions.handleVisibility
 import com.team23.core.extensions.navigateToUser
@@ -67,7 +67,7 @@ class PostFragment : Fragment() {
         }
         commentRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = CommentListAdapter().apply {
+            adapter = CommentListAdapter(this@PostFragment.requireContext()).apply {
                 onUserClick = { userId -> findNavController().navigateToUser(userId) }
             }
         }
@@ -100,10 +100,16 @@ class PostFragment : Fragment() {
                 .handleVisibility(!it)
         }
         postViewModel.post.observe(viewLifecycleOwner) { post ->
-            requireView().findViewById<ImageView>(R.id.post_picture)
-                .load(post.postPicture.toUri().buildUpon().scheme("https").build())
+            Glide.with(requireContext())
+                .load(post.postPicture)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .into(requireView().findViewById(R.id.post_picture))
             requireView().findViewById<ImageView>(R.id.user_picture).let {
-                it.load(post.userPicture.toUri().buildUpon().scheme("https").build())
+                Glide.with(requireContext())
+                    .load(post.userPicture)
+                    .circleCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                    .into(it)
                 it.setOnClickListener {
                     findNavController().navigateToUser(post.userId)
                 }

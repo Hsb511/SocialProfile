@@ -21,11 +21,13 @@ dependencies {
     implementation("com.google.dagger:hilt-android:${Versions.HILT}")
     kapt("com.google.dagger:hilt-android-compiler:${Versions.HILT}")
 
-    // NAVIGATION
+    // Navigation
     implementation("androidx.navigation:navigation-runtime-ktx:${Versions.NAVIGATION}")
     implementation("androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}")
 
-    implementation("io.coil-kt:coil:${Versions.COIL}")
+    // Glide
+    implementation("com.github.bumptech.glide:glide:${Versions.GLIDE}")
+    annotationProcessor("com.github.bumptech.glide:compiler:${Versions.GLIDE}")
 
     implementation("androidx.core:core-ktx:${Versions.ANDROID_CORE}")
     implementation("androidx.appcompat:appcompat:${Versions.APP_COMPAT}")

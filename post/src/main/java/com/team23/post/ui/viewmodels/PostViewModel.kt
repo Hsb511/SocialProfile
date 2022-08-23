@@ -1,10 +1,13 @@
 package com.team23.post.ui.viewmodels
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.team23.post.domain.usecases.GetCommentsUseCase
 import com.team23.post.domain.usecases.GetPostDataUseCase
 import com.team23.post.ui.viewobjects.CommentVO
@@ -15,6 +18,7 @@ import dagger.assisted.AssistedInject
 import kotlinx.coroutines.launch
 
 class PostViewModel @AssistedInject constructor(
+    application: Application,
     @Assisted private val postId: String?,
     private val getPostDataUseCase: GetPostDataUseCase,
     private val getCommentsUseCase: GetCommentsUseCase
@@ -26,11 +30,27 @@ class PostViewModel @AssistedInject constructor(
     init {
         if (postId != null) {
             viewModelScope.launch {
-                post.value = getPostDataUseCase.execute(postId)
+                post.value = getPostDataUseCase.execute(postId)?.also {
+                    Glide.with(application.applicationContext)
+                        .load(it.postPicture)
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                        .preload()
+                    Glide.with(application.applicationContext)
+                        .load(it.userPicture)
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                        .preload(40, 40)
+                }
                 isLoading.value = false
             }
             viewModelScope.launch {
-                comments.value = getCommentsUseCase.execute(postId)
+                val commentsData = getCommentsUseCase.execute(postId)
+                commentsData.forEach {
+                    Glide.with(application.applicationContext)
+                        .load(it.userPictureUrl)
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                        .preload(40, 40)
+                }
+                comments.value = commentsData
             }
         } else {
             // TODO SHOW ERROR

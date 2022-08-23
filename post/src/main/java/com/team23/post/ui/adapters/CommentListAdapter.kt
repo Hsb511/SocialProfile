@@ -1,20 +1,22 @@
 package com.team23.post.ui.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.team23.post.R
 import com.team23.post.ui.viewobjects.CommentVO
 
-class CommentListAdapter :
-    ListAdapter<CommentVO, CommentListAdapter.PostViewHolder>(PostDiffCallBack()) {
+class CommentListAdapter(
+    private val context: Context
+) : ListAdapter<CommentVO, CommentListAdapter.PostViewHolder>(PostDiffCallBack()) {
     inner class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val userPicture: ImageView = itemView.findViewById(R.id.comment_user_picture)
         private val userName: TextView = itemView.findViewById(R.id.comment_username)
@@ -23,7 +25,11 @@ class CommentListAdapter :
 
         fun bind(comment: CommentVO) {
             userPicture.let {
-                it.load(comment.userPictureUrl.toUri().buildUpon().scheme("https").build())
+                Glide.with(context)
+                    .load(comment.userPictureUrl)
+                    .circleCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                    .into(it)
                 it.setOnClickListener {
                     onUserClick?.invoke(comment.userId)
                 }

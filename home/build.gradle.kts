@@ -21,7 +21,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:${Versions.HILT}")
     kapt("com.google.dagger:hilt-android-compiler:${Versions.HILT}")
 
-    // Images dependencies
+    // Glide
     implementation("com.github.bumptech.glide:glide:${Versions.GLIDE}")
     annotationProcessor("com.github.bumptech.glide:compiler:${Versions.GLIDE}")
 
