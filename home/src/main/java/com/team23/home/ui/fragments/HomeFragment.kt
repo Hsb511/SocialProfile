@@ -41,7 +41,7 @@ class HomeFragment : Fragment() {
     private fun initViews() {
         postRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = PostListAdapter().apply {
+            adapter = PostListAdapter(this@HomeFragment.requireContext()).apply {
                 val navController = findNavController()
                 onUserClick = { userId -> navController.navigateToUser(userId) }
                 onPostClick = { postId -> navController.navigateToPost(postId) }

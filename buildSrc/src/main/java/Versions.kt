@@ -5,6 +5,7 @@ object Versions {
     const val COIL = "1.1.1"
     const val COMPOSE = "1.2.0-alpha08"
     const val FRAGMENT = "1.5.0"
+    const val GLIDE = "4.13.2"
     const val HILT = "2.41"
     const val KOTLIN = "1.6.20"
     const val NAVIGATION = "2.5.1"

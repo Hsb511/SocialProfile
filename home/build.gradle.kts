@@ -21,7 +21,10 @@ dependencies {
     implementation("com.google.dagger:hilt-android:${Versions.HILT}")
     kapt("com.google.dagger:hilt-android-compiler:${Versions.HILT}")
 
-    implementation("io.coil-kt:coil:${Versions.COIL}")
+    // Images dependencies
+    implementation("com.github.bumptech.glide:glide:${Versions.GLIDE}")
+    annotationProcessor("com.github.bumptech.glide:compiler:${Versions.GLIDE}")
+
     implementation("androidx.core:core-ktx:${Versions.ANDROID_CORE}")
     implementation("androidx.appcompat:appcompat:${Versions.APP_COMPAT}")
     implementation("com.google.android.material:material:1.6.1")

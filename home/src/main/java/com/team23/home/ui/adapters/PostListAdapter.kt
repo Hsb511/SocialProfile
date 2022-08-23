@@ -1,5 +1,6 @@
 package com.team23.home.ui.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,15 +9,22 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.team23.home.R
 import com.team23.home.ui.viewobjects.PostVO
 
-class PostListAdapter : ListAdapter<PostVO, PostListAdapter.PostViewHolder>(PostDiffCallBack()) {
+class PostListAdapter(
+    private val context: Context
+) : ListAdapter<PostVO, PostListAdapter.PostViewHolder>(PostDiffCallBack()) {
     inner class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(post: PostVO) {
             itemView.findViewById<ImageView>(R.id.user_picture).let {
-                it.load(post.ownerPictureUri)
+                Glide.with(context)
+                    .load(post.ownerPictureUri)
+                    .circleCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                    .into(it)
                 it.setOnClickListener {
                     onUserClick?.invoke(post.ownerId)
                 }
@@ -24,7 +32,10 @@ class PostListAdapter : ListAdapter<PostVO, PostListAdapter.PostViewHolder>(Post
             itemView.findViewById<TextView>(R.id.user_name).text = post.ownerName
             itemView.findViewById<TextView>(R.id.post_date).text = post.publishDate
             itemView.findViewById<ImageView>(R.id.post_image).let {
-                it.load(post.imageUri)
+                Glide.with(context)
+                    .load(post.imageUri)
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                    .into(it)
                 it.setOnClickListener {
                     onPostClick?.invoke(post.id)
                 }
