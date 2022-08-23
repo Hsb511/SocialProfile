@@ -9,7 +9,7 @@ import org.junit.Assert.assertNotNull
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class PostMapperExtensions {
+class PostMapperTest {
     @Test
     fun `given empty PostPreview, when toModel is called, then `() {
         // GIVEN
