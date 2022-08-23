@@ -4,5 +4,5 @@ import com.team23.home.domain.models.PostModel
 import kotlinx.coroutines.flow.Flow
 
 interface PostRepository {
-    fun getPosts(): Flow<List<PostModel>>
+    suspend fun getPosts(): List<PostModel>
 }

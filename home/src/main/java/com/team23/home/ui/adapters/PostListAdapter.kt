@@ -5,50 +5,43 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.team23.home.R
-import com.team23.home.domain.models.PostModel
+import com.team23.home.ui.viewobjects.PostVO
 
-class PostListAdapter : ListAdapter<PostModel, PostListAdapter.PostViewHolder>(PostDiffCallBack()) {
+class PostListAdapter : ListAdapter<PostVO, PostListAdapter.PostViewHolder>(PostDiffCallBack()) {
     inner class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val userPicture: ImageView = itemView.findViewById(R.id.user_picture)
-        private val userName: TextView = itemView.findViewById(R.id.user_name)
-        private val postDate: TextView = itemView.findViewById(R.id.post_date)
-        private val postImage: ImageView = itemView.findViewById(R.id.post_image)
-        private val postDescription: TextView = itemView.findViewById(R.id.post_description)
-
-        fun bind(post: PostModel) {
-            userPicture.let {
-                it.load(post.ownerPictureUrl.toUri().buildUpon().scheme("https").build())
+        fun bind(post: PostVO) {
+            itemView.findViewById<ImageView>(R.id.user_picture).let {
+                it.load(post.ownerPictureUri)
                 it.setOnClickListener {
                     onUserClick?.invoke(post.ownerId)
                 }
             }
-            userName.text = post.ownerName
-            postDate.text = post.publishDate
-            postImage.let {
-                it.load(post.imageUrl.toUri().buildUpon().scheme("https").build())
+            itemView.findViewById<TextView>(R.id.user_name).text = post.ownerName
+            itemView.findViewById<TextView>(R.id.post_date).text = post.publishDate
+            itemView.findViewById<ImageView>(R.id.post_image).let {
+                it.load(post.imageUri)
                 it.setOnClickListener {
                     onPostClick?.invoke(post.id)
                 }
             }
-            postDescription.text = post.text
+            itemView.findViewById<TextView>(R.id.post_description).text = post.text
         }
     }
 
     var onUserClick: ((String) -> Unit)? = null
     var onPostClick: ((String) -> Unit)? = null
 
-    private class PostDiffCallBack : DiffUtil.ItemCallback<PostModel>() {
+    private class PostDiffCallBack : DiffUtil.ItemCallback<PostVO>() {
         /**
          * Called to check whether two objects represent the same item.
          * For example, if your items have unique ids, this method should check their id equality.
          */
-        override fun areItemsTheSame(oldItem: PostModel, newItem: PostModel) =
+        override fun areItemsTheSame(oldItem: PostVO, newItem: PostVO) =
             oldItem.id == newItem.id
 
         /**
@@ -56,14 +49,12 @@ class PostListAdapter : ListAdapter<PostModel, PostListAdapter.PostViewHolder>(P
          * For example, if you are using DiffUtil with a RecyclerView.Adapter, you should
          * return whether the items' visual representations are the same.
          */
-        override fun areContentsTheSame(oldItem: PostModel, newItem: PostModel) =
-            oldItem.ownerPictureUrl == newItem.ownerPictureUrl &&
+        override fun areContentsTheSame(oldItem: PostVO, newItem: PostVO) =
+            oldItem.ownerPictureUri == newItem.ownerPictureUri &&
                     oldItem.ownerName == newItem.ownerName &&
                     oldItem.publishDate == newItem.publishDate &&
-                    oldItem.imageUrl == newItem.imageUrl &&
+                    oldItem.imageUri == newItem.imageUri &&
                     oldItem.text == newItem.text
-
-
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
