@@ -10,13 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.team23.post.R
 
 class TagsListAdapter :
-    ListAdapter<String, TagsListAdapter.TagsViewHolder>(TagDiffCallback())
-    {
+    ListAdapter<String, TagsListAdapter.TagsViewHolder>(TagDiffCallback()) {
         inner class TagsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            private val textTag: TextView = itemView.findViewById(R.id.text_tag)
 
             fun bind(tag: String) {
-                textTag.text = tag
+                itemView.findViewById<TextView>(R.id.text_tag).text = tag
             }
         }
 

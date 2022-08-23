@@ -18,13 +18,8 @@ class CommentListAdapter(
     private val context: Context
 ) : ListAdapter<CommentVO, CommentListAdapter.PostViewHolder>(PostDiffCallBack()) {
     inner class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val userPicture: ImageView = itemView.findViewById(R.id.comment_user_picture)
-        private val userName: TextView = itemView.findViewById(R.id.comment_username)
-        private val commentDuration: TextView = itemView.findViewById(R.id.comment_duration)
-        private val commentText: TextView = itemView.findViewById(R.id.comment_text)
-
         fun bind(comment: CommentVO) {
-            userPicture.let {
+            itemView.findViewById<ImageView>(R.id.comment_user_picture).let {
                 Glide.with(context)
                     .load(comment.userPictureUrl)
                     .circleCrop()
@@ -34,9 +29,9 @@ class CommentListAdapter(
                     onUserClick?.invoke(comment.userId)
                 }
             }
-            userName.text = comment.username
-            commentDuration.text = comment.duration
-            commentText.text = comment.text
+            itemView.findViewById<TextView>(R.id.comment_username).text = comment.username
+            itemView.findViewById<TextView>(R.id.comment_duration).text = comment.duration
+            itemView.findViewById<TextView>(R.id.comment_text).text = comment.text
         }
     }
 
