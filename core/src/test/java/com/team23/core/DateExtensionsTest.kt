@@ -90,10 +90,10 @@ class DateExtensionsTest {
         val invalidStringDate = ""
 
         // THEN
-        assertThrows(DateTimeParseException::class.java) {
-            // WHEN
-            invalidStringDate.fromISO8601toReadableDateTime()
-        }
+        val date = invalidStringDate.fromISO8601toReadableDateTime()
+
+        // WHEN
+        assertEquals("", date)
     }
 
     @Test
